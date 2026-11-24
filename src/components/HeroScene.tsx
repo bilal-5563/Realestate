@@ -52,11 +52,11 @@ export default function HeroScene({ scene }: { scene: string }) {
     };
 
     if (document.documentElement.classList.contains('is-loaded')) load();
-    else window.addEventListener('plinth:loaded', load, { once: true });
+    else window.addEventListener('scaleit:loaded', load, { once: true });
 
     return () => {
       cancelled = true;
-      window.removeEventListener('plinth:loaded', load);
+      window.removeEventListener('scaleit:loaded', load);
       cleanup.current?.();
     };
   }, []);
@@ -123,7 +123,7 @@ export default function HeroScene({ scene }: { scene: string }) {
 
     apply();
     setReady(true);
-    window.dispatchEvent(new CustomEvent('plinth:scene-ready'));
+    window.dispatchEvent(new CustomEvent('scaleit:scene-ready'));
   }, []);
 
   return (

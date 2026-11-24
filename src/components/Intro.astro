@@ -1,11 +1,11 @@
 ---
 import GridLines from './GridLines.astro';
-import { STATS } from '../site.config';
+import { STATS, STATS_ARE_DEMO } from '../site.config';
 
 const shifts = [
-  { n: '01', area: 'Credibility', before: 'A brochure site', after: 'A portfolio that wins tenders.' },
-  { n: '02', area: 'Sales', before: 'PDF price lists', after: 'Property pages that sell off-plan.' },
-  { n: '03', area: 'Enquiries', before: 'An unanswered form', after: 'A direct line to your sales team.' },
+  { n: '01', area: 'Pricing', before: 'Surprise costs', after: 'Fixed, transparent pricing.' },
+  { n: '02', area: 'Programme', before: 'Open-ended delays', after: 'A dated programme, tracked weekly.' },
+  { n: '03', area: 'Communication', before: 'Chasing for updates', after: 'One site lead, one weekly report.' },
 ];
 
 /* Markup overlay: drawn in the crop's own pixel space (1340 × 1675) so it locks to the photo. */
@@ -22,12 +22,12 @@ const pct = (x: number, y: number) => `left:${((x / VB.w) * 100).toFixed(2)}%;to
       <span class="text-markup">(02)</span>&ensp;Introduction
     </p>
     <p class="hidden md:block md:col-span-4 lg:col-span-4 lg:col-start-9 type-label text-right text-stone">
-      Studio for the built world
+      Engineering-led construction
     </p>
 
     <!-- Statement -->
     <h2 id="intro-title" class="intro__statement col-span-full lg:col-span-11 mt-s5 lg:mt-s6" data-split-lines>
-      Your projects are engineered to the <span class="type-accent">millimetre.</span> Your website should be too.
+      Every build engineered to the <span class="type-accent">millimetre.</span> Every handover planned to the day.
     </h2>
 
     <!-- Marked-up photograph -->
@@ -86,12 +86,12 @@ const pct = (x: number, y: number) => `left:${((x / VB.w) * 100).toFixed(2)}%;to
     <!-- Intro copy + what changes -->
     <div class="col-span-full md:col-span-4 md:col-start-5 lg:col-span-5 lg:col-start-8 mt-s5 lg:mt-s6 flex flex-col">
       <p class="type-lead text-ink" data-fade-up>
-        Plinth is a small studio of designers and developers who work only with the built environment. We turn
-        project archives, floor plans and site photography into websites that do what your best salesperson does:
-        explain the work, prove the quality and start the conversation.
+        SCALE IT Constructions is a design-and-build contractor for villas, commercial buildings and high-end
+        interiors. One team owns your project from site study to handover: engineers, site managers and finishers
+        working from the same drawings, the same budget and the same programme.
       </p>
 
-      <p class="mt-s5 type-label text-stone" data-fade-up>What changes</p>
+      <p class="mt-s5 type-label text-stone" data-fade-up>What you get</p>
       <ol class="mt-s2 border-t border-line-light" data-shifts>
         {
           shifts.map((s) => (
@@ -159,6 +159,7 @@ const pct = (x: number, y: number) => `left:${((x / VB.w) * 100).toFixed(2)}%;to
         ))
       }
     </dl>
+    {STATS_ARE_DEMO && <p class="col-span-full mt-s4 type-label text-stone">Illustrative demo figures</p>}
   </div>
 </section>
 

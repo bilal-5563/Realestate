@@ -16,7 +16,7 @@ import { initWhy } from './why';
 import { initContactForm } from './contact';
 
 gsap.registerPlugin(ScrollTrigger);
-(window as Window & { __plinthBooted?: boolean }).__plinthBooted = true;
+(window as Window & { __siteBooted?: boolean }).__siteBooted = true;
 
 const motionOk = document.documentElement.classList.contains('motion-ok');
 
@@ -27,7 +27,7 @@ initCursor();
 initMagnetic();
 initContactForm();
 
-// Sections in page order (the concepts pin adds scroll distance below it).
+// Sections in page order (the concepts spacer adds scroll distance below it).
 initIntro();
 initConcepts();
 initCapabilities();

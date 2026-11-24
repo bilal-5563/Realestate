@@ -1,12 +1,12 @@
 ---
 import { ArrowUpRight, MessageCircle } from 'lucide-react';
-import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
+import { SITE, FORM, whatsappHref, telHref, formConfigured } from '../site.config';
 ---
 
 <section id="contact" class="contact relative bg-markup text-bone" aria-labelledby="contact-title" data-contact>
   <div class="grid-site relative pt-s6 pb-s6 lg:pt-s7 lg:pb-s7">
     <p class="col-span-full md:col-span-4 type-label text-bone/90"><span class="text-bone">(07)</span>&ensp;Contact</p>
-    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-bone/90">Start with a conversation</p>
+    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-bone/90">Free site visit &amp; quote</p>
 
     <h2 id="contact-title" class="contact__title col-span-full mt-s5" data-split-lines>
       Let's build <span class="type-accent">it.</span>
@@ -15,7 +15,7 @@ import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
     <!-- Direct routes -->
     <div class="col-span-full lg:col-span-5 mt-s5 lg:mt-s6 flex flex-col gap-s4">
       <p class="type-lead max-w-[34ch]" data-fade-up>
-        Tell us about the project — a new website, a launch, or a site that no longer matches the quality of your work.
+        Tell us about the plot, the building or the space, and we'll come back with a site visit and a clear, itemised quote.
       </p>
       <div class="flex flex-col items-start gap-s3" data-fade-up>
         <a href={whatsappHref} class="contact__cta" target="_blank" rel="noopener" data-magnetic data-cursor="Chat">
@@ -26,7 +26,8 @@ import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
         <a href={`mailto:${SITE.email}`} class="contact__mail" data-cursor="Write">{SITE.email}</a>
       </div>
       <p class="text-bone/90 text-[0.9375rem] max-w-[38ch]" data-fade-up>
-        Prefer a call? Leave a number in the form and say when suits you.
+        Free site visit and quote, with no obligation. Prefer a call? Ring <a href={telHref} class="underline">{SITE.phone}</a>{' '}
+        or leave a number in the form.
       </p>
     </div>
 
@@ -42,7 +43,7 @@ import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
     >
       <input type="hidden" name="access_key" value={FORM.accessKey} />
       <input type="hidden" name="subject" value={FORM.subject} />
-      <input type="hidden" name="from_name" value={`${SITE.legalName} website`} />
+      <input type="hidden" name="from_name" value={`${SITE.legalName}: quote form`} />
       <!-- Honeypot: humans never see or fill this -->
       <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -74,11 +75,12 @@ import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
 
       <div class="contact__row">
         <div class="field">
-          <label for="f-sector">Your business</label>
-          <select id="f-sector" name="business">
-            <option>Construction</option>
-            <option>Architecture</option>
-            <option>Real estate development</option>
+          <label for="f-sector">Project type</label>
+          <select id="f-sector" name="project_type">
+            <option>Villa or private home</option>
+            <option>Commercial building</option>
+            <option>Interior fit-out</option>
+            <option>Renovation or remodel</option>
             <option>Something else</option>
           </select>
         </div>
@@ -88,20 +90,20 @@ import { SITE, FORM, whatsappHref, formConfigured } from '../site.config';
             <option>As soon as possible</option>
             <option>Within 3 months</option>
             <option>Later this year</option>
-            <option>Just exploring</option>
+            <option>Still planning</option>
           </select>
         </div>
       </div>
 
       <div class="field">
-        <label for="f-message">About the project *</label>
+        <label for="f-message">About the project and site *</label>
         <textarea id="f-message" name="message" rows="4" required minlength="10" aria-describedby="f-message-err"></textarea>
         <p id="f-message-err" class="field__err" data-err></p>
       </div>
 
       <div class="mt-s4 flex flex-wrap items-center gap-s3">
         <button type="submit" class="contact__submit" data-magnetic data-cursor="Send">
-          <span data-magnetic-inner>Send enquiry</span>
+          <span data-magnetic-inner>Request a quote</span>
           <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
         </button>
         <p class="contact__status" role="status" aria-live="polite" data-form-status></p>

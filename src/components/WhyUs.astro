@@ -1,30 +1,31 @@
 ---
 import GridLines from './GridLines.astro';
+import { PERF } from '../site.config';
 
 const pillars = [
   {
-    area: 'Creativity',
-    title: 'Art direction, not templates.',
-    body: 'Every site gets its own identity, built around your projects, your buyers and your market — the way a building is designed for its plot.',
-    spec: 'One concept, fully developed',
+    area: 'Precision engineering',
+    title: 'Engineered before it’s built.',
+    body: 'Structural design, setting-out and quality checks stay in-house, so every slab, column and joint lands exactly where the drawings say.',
+    spec: 'In-house engineers · QA at every stage',
   },
   {
-    area: 'Performance',
-    title: 'Fast on a site-office 4G.',
-    body: 'Image pipelines, lazy loading and lean code keep pages light. We build to a 90+ Lighthouse performance score on mobile and measure before launch.',
-    spec: 'Measured before handover',
+    area: 'Price & programme',
+    title: 'A date and a price, in writing.',
+    body: 'A fixed, itemised quote and a dated programme, agreed before we break ground and tracked in a weekly report, so the final invoice is never a surprise.',
+    spec: 'Fixed-price contracts',
   },
   {
-    area: 'Responsive design',
-    title: 'Designed for the phone in the hard hat.',
-    body: 'Phone, tablet and desktop each get a layout of their own, with touch targets sized for gloves-off thumbs, tested on real devices.',
-    spec: 'Three layouts, not one squeezed',
+    area: 'Materials & workmanship',
+    title: 'Finishes you’ll want to touch.',
+    body: 'Specified materials from named suppliers, trades we have worked with for years, and a snag list closed before you get the keys.',
+    spec: 'Snag list closed at handover',
   },
   {
-    area: 'Premium UX',
-    title: 'The calm of a well-run site.',
-    body: 'Clear routes to an enquiry, keyboard and screen-reader friendly, and motion that steps back for anyone who prefers less of it.',
-    spec: 'Accessibility built in',
+    area: 'This website',
+    title: 'Fast, even with the effects.',
+    body: 'This page runs scroll-driven animation and a live 3D model, yet it’s built to feel instant, even on a mid-range phone. Phones get a light still of the model, and every effect plays over a page that has already loaded. Scored on a throttled phone test:',
+    spec: `${PERF.tool} · ${PERF.performance}/100 · LCP ${PERF.lcp} · CLS ${PERF.cls}`,
   },
 ];
 ---
@@ -32,8 +33,8 @@ const pillars = [
 <section id="why" class="why on-light relative bg-haze text-ink" aria-labelledby="why-title" data-why>
   <GridLines tone="light" />
   <div class="grid-site relative pt-s6 lg:pt-s7">
-    <p class="col-span-full md:col-span-4 type-label text-stone"><span class="text-markup">(06)</span>&ensp;Why Plinth</p>
-    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-stone">Specialists, not generalists</p>
+    <p class="col-span-full md:col-span-4 type-label text-stone"><span class="text-markup">(06)</span>&ensp;Why choose SCALE IT</p>
+    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-stone">One team, site to handover</p>
     <h2 id="why-title" class="why__title col-span-full lg:col-span-10 mt-s5" data-split-lines>
       Built by people who read <span class="type-accent text-markup">drawings.</span>
     </h2>

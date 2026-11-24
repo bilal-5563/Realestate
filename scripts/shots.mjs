@@ -50,7 +50,7 @@ for (const vp of viewports) {
         () =>
           new Promise((res) => {
             if (document.querySelector('[data-hero-stage] canvas')) return res('canvas-present');
-            window.addEventListener('plinth:scene-ready', () => res('ready'), { once: true });
+            window.addEventListener('scaleit:scene-ready', () => res('ready'), { once: true });
             setTimeout(() => res(document.querySelector('[data-hero-stage] canvas') ? 'canvas-present' : 'timeout'), 25000);
           }),
       )

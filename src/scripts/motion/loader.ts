@@ -10,12 +10,12 @@ const fontsReady = () =>
 function finish() {
   root.classList.add('is-loaded');
   try {
-    sessionStorage.setItem('plinth:seen', '1');
+    sessionStorage.setItem('scaleit:seen', '1');
   } catch {
     /* private mode */
   }
   getLenis()?.start();
-  window.dispatchEvent(new CustomEvent('plinth:loaded'));
+  window.dispatchEvent(new CustomEvent('scaleit:loaded'));
 }
 
 /**

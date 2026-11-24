@@ -1,8 +1,8 @@
 ---
-import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
 import HeroScene from './HeroScene.tsx';
 import GridLines from './GridLines.astro';
-import { SITE, whatsappHref } from '../site.config';
+import { SITE } from '../site.config';
 ---
 
 <section id="top" class="hero relative isolate overflow-hidden bg-ink" data-hero aria-labelledby="hero-title">
@@ -10,8 +10,8 @@ import { SITE, whatsappHref } from '../site.config';
 
   <!-- Drawing annotations -->
   <div class="hero__meta grid-site" data-hero-fade>
-    <p class="col-span-2 md:col-span-3 type-label text-concrete">
-      <span class="text-markup-light">(01)</span>&ensp;Studio
+    <p class="col-span-2 md:col-span-3 type-label text-concrete whitespace-nowrap">
+      <span class="text-markup-light">(01)</span>&ensp;{SITE.legalName}
     </p>
     <p class="col-span-2 md:col-span-5 lg:col-span-5 lg:col-start-8 type-label text-right text-concrete whitespace-nowrap">
       Fig. 01<span class="hidden md:inline"> — Cantilever House</span><span class="hidden xl:inline">, 1:200</span>
@@ -53,13 +53,13 @@ import { SITE, whatsappHref } from '../site.config';
 
   <div class="hero__content grid-site">
     <h1 id="hero-title" class="col-span-full lg:col-span-8 type-mega">
-      <span class="line-mask"><span class="block" data-hero-line>Websites</span></span>
+      <span class="line-mask"><span class="block" data-hero-line>Scale up,</span></span>
       <span class="line-mask pl-[9%] md:pl-[12.5%] lg:pl-[11%]">
-        <span class="block type-accent text-[0.94em] leading-[0.92]" data-hero-line>built like</span>
+        <span class="block type-accent text-[0.94em] leading-[0.92]" data-hero-line>faster, to the</span>
       </span>
       <span class="line-mask relative">
         <span class="relative inline-block" data-hero-line>
-          landmarks.
+          millimetre.
           <svg class="hero__markup" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true">
             <path
               data-hero-markup
@@ -76,24 +76,22 @@ import { SITE, whatsappHref } from '../site.config';
 
     <div class="col-span-full md:col-span-6 lg:col-span-4 lg:col-start-9 hero__aside" data-hero-fade>
       <p class="max-w-[38ch] text-[1rem] leading-[1.55] text-bone/80 lg:text-[1.0625rem]">
-        We design and build premium websites for construction companies, architecture studios and real estate
-        developers — engineered to win tenders, sell units and earn trust before the first site visit.
+        Residential, commercial and luxury builds by SCALE IT Constructions — engineered in-house, priced in the
+        open and run to a programme you can read, from first survey to final handover.
       </p>
       <div class="mt-s3 grid gap-s1 sm:flex sm:flex-wrap">
-        <a href="#contact" class="btn btn--primary justify-between sm:justify-start" data-magnetic data-cursor="Talk">
-          <span class="btn__label" data-magnetic-inner>Start a project</span>
+        <a href="#contact" class="btn btn--primary justify-between sm:justify-start" data-magnetic data-cursor="Quote">
+          <span class="btn__label" data-magnetic-inner>Request a quote</span>
           <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
         </a>
         <a
-          href={whatsappHref}
+          href="#work"
           class="btn btn--ghost justify-between sm:justify-start"
-          target="_blank"
-          rel="noopener"
           data-magnetic
-          data-cursor="Chat"
+          data-cursor="View"
         >
-          <span class="btn__label" data-magnetic-inner>WhatsApp</span>
-          <MessageCircle size={16} strokeWidth={1.5} aria-hidden="true" />
+          <span class="btn__label" data-magnetic-inner>See our projects</span>
+          <ArrowDownRight size={16} strokeWidth={1.5} aria-hidden="true" />
         </a>
       </div>
     </div>

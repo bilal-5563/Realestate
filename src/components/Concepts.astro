@@ -1,8 +1,10 @@
 ---
+import { PROJECTS } from '../site.config';
 /**
- * 03 — Featured concepts. Three FICTIONAL client brands, each art-directed as a live site.
+ * 03 — Featured projects. Three project types by SCALE IT Constructions, each shown as an art-directed sheet.
+ * Project details are DEMO PLACEHOLDERS and live in site.config.ts (PROJECTS).
  * Desktop + motion: pinned horizontal track. Everyone else: a vertical stack (also the no-JS layout).
- * Mock-site internals are decorative (aria-hidden, nothing focusable); each concept has a real text summary.
+ * Panel internals are decorative (aria-hidden, nothing focusable); each project has a real text summary.
  */
 const pic = (name: string, widths: number[], sizes: string) => ({
   avif: widths.map((w) => `/images/${name}-${w}.avif ${w}w`).join(', '),
@@ -13,29 +15,30 @@ const pic = (name: string, widths: number[], sizes: string) => ({
 const tower = pic('a-tower', [540, 800, 1200], '(min-width: 1024px) 46vw, 92vw');
 const weld = pic('a-weld', [600, 900], '(min-width: 1024px) 16vw, 36vw');
 const bSlides = [
-  { ...pic('b-pool', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), name: 'Villa Serein', meta: '5 bedrooms · Hillside · Private pool' },
-  { ...pic('b-villa', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), name: 'Casa Lumen', meta: '4 bedrooms · Sea view · Infinity edge' },
-  { ...pic('b-living', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), name: 'The Atrium Residence', meta: 'Double-height living · Ocean frontage' },
+  { ...pic('b-pool', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), ...PROJECTS.villas.slides[0] },
+  { ...pic('b-villa', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), ...PROJECTS.villas.slides[1] },
+  { ...pic('b-living', [640, 1000, 1600], '(min-width: 1024px) 80vw, 100vw'), ...PROJECTS.villas.slides[2] },
 ];
 const cConcrete = pic('c-concrete', [600, 900], '(min-width: 1024px) 30vw, 60vw');
 const cWhite = pic('c-white', [480, 700], '(min-width: 1024px) 16vw, 34vw');
 const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
+const caps = PROJECTS.renovation.captions;
 ---
 
 <section id="work" class="concepts relative bg-ink text-bone" aria-labelledby="work-title" data-concepts>
   <div class="grid-site pt-s6 lg:pt-s7">
     <p class="col-span-full md:col-span-4 type-label text-concrete">
-      <span class="text-markup-light">(03)</span>&ensp;Featured concepts
+      <span class="text-markup-light">(03)</span>&ensp;Featured projects
     </p>
     <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-concrete">
-      Fictional brands · Real craft
+      Residential · Commercial · Renovation
     </p>
     <h2 id="work-title" class="concepts__title col-span-full lg:col-span-9 mt-s5" data-split-lines>
-      Three sites we'd build <span class="type-accent text-markup-light">tomorrow.</span>
+      Three briefs. One <span class="type-accent text-markup-light">standard.</span>
     </h2>
     <p class="col-span-full md:col-span-6 lg:col-span-4 lg:col-start-9 mt-s4 lg:mt-s5 self-end text-bone/75" data-fade-up>
-      Each concept is a complete art direction — identity, typography, palette and motion — for one of the sectors we
-      serve. The brands are invented; the thinking is exactly what your project gets.
+      Commercial towers, luxury villas and full renovations: each one designed, engineered and built by a single
+      SCALE IT team, with the same site lead from groundbreaking to handover.
     </p>
   </div>
 
@@ -43,43 +46,43 @@ const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
     <!-- Horizontal progress (desktop track only) -->
     <div class="concepts__progress grid-site" aria-hidden="true">
       <div class="col-span-full flex items-center gap-s3 type-label text-concrete">
-        <span class="w-[7.5rem]" data-progress-label>Concept A</span>
+        <span class="w-[7.5rem]" data-progress-label>Project A</span>
         <span class="concepts__rail"><i data-progress-bar></i></span>
-        <span>03 concepts</span>
+        <span>03 projects</span>
       </div>
     </div>
 
     <div class="concepts__track" data-concepts-track>
-      <!-- ───────────── A · HALDEN STRUCTURAL ───────────── -->
+      <!-- ───────────── A · COMMERCIAL & HIGH-RISE ───────────── -->
       <article class="concept" data-concept="a" aria-labelledby="concept-a-title">
         <header class="concept__meta">
-          <span class="type-label text-markup-light">Concept A</span>
-          <h3 id="concept-a-title" class="type-label">Luxury construction — Halden Structural</h3>
-          <span class="concept__tag type-label">Fictional brand</span>
+          <span class="type-label text-markup-light">Project A</span>
+          <h3 id="concept-a-title" class="type-label">{PROJECTS.tower.type} — Towers</h3>
+          <span class="concept__tag type-label">Demo project</span>
         </header>
 
         <figure class="concept__frame">
-          <div class="concept__chrome" aria-hidden="true"><span>halden-structural.com</span><span>Concept</span></div>
+          <div class="concept__chrome" aria-hidden="true"><span>Sheet P-A · Commercial tower</span><span>Demo</span></div>
           <div class="cframe" aria-hidden="true">
             <div class="ca">
               <div class="ca__copy">
                 <div class="ca__nav">
                   <span class="ca__logo">
-                    <svg viewBox="0 0 20 20"><path d="M2 3h16M2 17h16M10 3v14" /></svg>HALDEN
+                    <svg viewBox="0 0 20 20"><path d="M2 3h16M2 17h16M10 3v14" /></svg>SCALE IT
                   </span>
-                  <span class="ca__links"><span>Projects</span><span>Capability</span><span>Safety</span></span>
+                  <span class="ca__links"><span>Structure</span><span>Façade</span><span>MEP</span></span>
                 </div>
                 <div>
-                  <p class="ca__kicker">Design &amp; build · Towers · Since 1998</p>
+                  <p class="ca__kicker">{PROJECTS.tower.kicker}</p>
                   <p class="ca__headline">Built to<br />tolerance<span>.</span></p>
-                  <p class="ca__sub">Main contractor for landmark residential and commercial towers. Engineered, sequenced and delivered in-house.</p>
+                  <p class="ca__sub">Offices, hotels and mixed-use towers, engineered, sequenced and delivered by our own site teams.</p>
                 </div>
                 <div class="ca__specs">
-                  <span><b>Structure</b>Post-tensioned concrete</span>
-                  <span><b>Delivery</b>Design &amp; build</span>
-                  <span><b>Package</b>Structure to façade</span>
+                  {PROJECTS.tower.specs.map(([k, v]) => (
+                    <span><b>{k}</b>{v}</span>
+                  ))}
                 </div>
-                <div class="ca__ctas"><span class="ca__btn">View projects</span><span class="ca__btn ca__btn--ghost">Tender portal</span></div>
+                <div class="ca__ctas"><span class="ca__btn">Request a quote</span><span class="ca__btn ca__btn--ghost">Site visit</span></div>
               </div>
               <div class="ca__media">
                 <picture>
@@ -111,28 +114,28 @@ const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
             </div>
           </div>
           <figcaption class="sr-only">
-            Concept homepage for Halden Structural, a fictional luxury construction contractor: a dark steel layout with a wide
-            uppercase headline, project specifications, and amber engineering callouts drawn over a tower under construction.
+            Commercial and high-rise project sheet: a dark steel layout with the headline "Built to tolerance", the project's
+            location, scope and timeline, and amber engineering callouts drawn over a tower under construction.
           </figcaption>
         </figure>
 
         <dl class="concept__notes">
-          <div><dt>Idea</dt><dd>Sell certainty. Every claim is backed by a drawing, a number or a photograph from site.</dd></div>
-          <div><dt>Signature</dt><dd>Engineering callouts draw themselves over project photography.</dd></div>
-          <div><dt>Built for</dt><dd>Tender teams, developers and investors who check before they call.</dd></div>
+          <div><dt>The brief</dt><dd>Grade-A offices and mixed-use towers on tight city plots, built around live streets.</dd></div>
+          <div><dt>Engineering</dt><dd>Post-tensioned slabs and transfer levels, sequenced floor by floor.</dd></div>
+          <div><dt>Built for</dt><dd>Developers and investors who need a fixed price and a dated programme.</dd></div>
         </dl>
       </article>
 
-      <!-- ───────────── B · MAISON AUREL ───────────── -->
+      <!-- ───────────── B · LUXURY RESIDENTIAL ───────────── -->
       <article class="concept" data-concept="b" aria-labelledby="concept-b-title">
         <header class="concept__meta">
-          <span class="type-label text-markup-light">Concept B</span>
-          <h3 id="concept-b-title" class="type-label">Luxury real estate — Maison Aurel</h3>
-          <span class="concept__tag type-label">Fictional brand</span>
+          <span class="type-label text-markup-light">Project B</span>
+          <h3 id="concept-b-title" class="type-label">{PROJECTS.villas.type} — Villas</h3>
+          <span class="concept__tag type-label">Demo project</span>
         </header>
 
         <figure class="concept__frame">
-          <div class="concept__chrome" aria-hidden="true"><span>maison-aurel.com</span><span>Concept</span></div>
+          <div class="concept__chrome" aria-hidden="true"><span>Sheet P-B · Private villas</span><span>Demo</span></div>
           <div class="cframe" aria-hidden="true">
             <div class="cb" data-crossfade>
               {
@@ -145,17 +148,17 @@ const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
               }
               <div class="cb__shade"></div>
               <div class="cb__nav">
-                <span class="cb__links"><span>Residences</span><span>The Collection</span></span>
-                <span class="cb__logo">Maison <em>Aurel</em></span>
-                <span class="cb__links cb__links--end"><span>Journal</span><span class="cb__pill">Private viewing</span></span>
+                <span class="cb__links"><span>Villas</span><span>Interiors</span></span>
+                <span class="cb__logo">SCALE IT <em>Villas</em></span>
+                <span class="cb__links cb__links--end"><span>Process</span><span class="cb__pill">Free site visit</span></span>
               </div>
               <div class="cb__foot">
-                <p class="cb__headline">Live above<br /><em>the ordinary.</em></p>
+                <p class="cb__headline">Built around<br /><em>how you live.</em></p>
                 <div class="cb__card">
                   {
                     bSlides.map((s, i) => (
                       <div class:list={['cb__info', i === 0 && 'is-active']} data-slide-info>
-                        <span class="cb__no">Residence 0{i + 1}</span>
+                        <span class="cb__no">Villa 0{i + 1}</span>
                         <span class="cb__name">{s.name}</span>
                         <span class="cb__meta">{s.meta}</span>
                       </div>
@@ -167,68 +170,68 @@ const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
             </div>
           </div>
           <figcaption class="sr-only">
-            Concept homepage for Maison Aurel, a fictional luxury real estate brand: full-bleed property photography that
-            crossfades between three residences, a centred serif wordmark and an ivory serif headline, "Live above the ordinary."
+            Luxury residential project sheet: full-bleed photography that crossfades between three villas, a centred serif
+            wordmark and an ivory serif headline, "Built around how you live."
           </figcaption>
         </figure>
 
         <dl class="concept__notes">
-          <div><dt>Idea</dt><dd>Sell the feeling first, the floor plan second — then make the viewing one tap away.</dd></div>
-          <div><dt>Signature</dt><dd>Slow cinematic crossfades between residences, timed like a film edit.</dd></div>
-          <div><dt>Built for</dt><dd>Buyers browsing on a phone at night, and the agents who follow up.</dd></div>
+          <div><dt>The brief</dt><dd>Private villas built to your architect's drawings, or designed with ours.</dd></div>
+          <div><dt>Engineering</dt><dd>Cantilevers, long-span slabs and infinity-edge pools, detailed before the first pour.</dd></div>
+          <div><dt>Built for</dt><dd>Owners who want one contract, one team and a home finished to the last joint.</dd></div>
         </dl>
       </article>
 
-      <!-- ───────────── C · ATELIER NORD ───────────── -->
+      <!-- ───────────── C · RENOVATION & REMODELLING ───────────── -->
       <article class="concept" data-concept="c" aria-labelledby="concept-c-title">
         <header class="concept__meta">
-          <span class="type-label text-markup-light">Concept C</span>
-          <h3 id="concept-c-title" class="type-label">Architecture studio — Atelier Nord</h3>
-          <span class="concept__tag type-label">Fictional brand</span>
+          <span class="type-label text-markup-light">Project C</span>
+          <h3 id="concept-c-title" class="type-label">{PROJECTS.renovation.type}</h3>
+          <span class="concept__tag type-label">Demo project</span>
         </header>
 
         <figure class="concept__frame">
-          <div class="concept__chrome concept__chrome--light" aria-hidden="true"><span>ateliernord.studio</span><span>Concept</span></div>
+          <div class="concept__chrome concept__chrome--light" aria-hidden="true"><span>Sheet P-C · Renovation</span><span>Demo</span></div>
           <div class="cframe" aria-hidden="true">
             <div class="cc">
               <div class="cc__nav">
-                <span class="cc__logo">atelier nord</span>
-                <span class="cc__links"><span>work</span><span>studio</span><span>writing</span><span>contact</span></span>
+                <span class="cc__logo">scale it</span>
+                <span class="cc__links"><span>survey</span><span>strip-out</span><span>rebuild</span><span>handover</span></span>
               </div>
-              <p class="cc__headline"><span class="cc__mask"><span data-c-title>Quiet buildings</span></span><span class="cc__mask"><span data-c-title>for loud cities.</span></span></p>
+              <p class="cc__headline"><span class="cc__mask"><span data-c-title>Old buildings,</span></span><span class="cc__mask"><span data-c-title>new standards.</span></span></p>
               <div class="cc__grid">
                 <div class="cc__item cc__item--a">
                   <div class="cc__img">
                     <picture><source type="image/avif" srcset={cConcrete.avif} sizes={cConcrete.sizes} /><img src={cConcrete.src} srcset={cConcrete.webp} sizes={cConcrete.sizes} width="900" height="1125" loading="lazy" decoding="async" alt="" /></picture>
                   </div>
-                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>01 — Haus am Hang, 2025</span></span></span>
+                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>{caps[0]}</span></span></span>
                 </div>
                 <div class="cc__item cc__item--b">
                   <div class="cc__img">
                     <picture><source type="image/avif" srcset={cWhite.avif} sizes={cWhite.sizes} /><img src={cWhite.src} srcset={cWhite.webp} sizes={cWhite.sizes} width="700" height="875" loading="lazy" decoding="async" alt="" /></picture>
                   </div>
-                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>02 — White Court</span></span></span>
+                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>{caps[1]}</span></span></span>
                 </div>
                 <div class="cc__item cc__item--c">
                   <div class="cc__img">
                     <picture><source type="image/avif" srcset={cRail.avif} sizes={cRail.sizes} /><img src={cRail.src} srcset={cRail.webp} sizes={cRail.sizes} width="900" height="600" loading="lazy" decoding="async" alt="" /></picture>
                   </div>
-                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>03 — Rue des Arts, refurbishment</span></span></span>
+                  <span class="cc__cap"><span class="cc__mask"><span data-c-title>{caps[2]}</span></span></span>
                 </div>
-                <p class="cc__note">An architecture practice working between landscape and city. Twelve people, one table, no renderings until the model is right.</p>
+                <p class="cc__note">Structural repairs, new layouts and complete fit-outs, phased around the people who still live and work there.</p>
               </div>
             </div>
           </div>
           <figcaption class="sr-only">
-            Concept homepage for Atelier Nord, a fictional architecture studio: a stark white editorial layout with a light
-            lowercase wordmark, a thin headline, "Quiet buildings for loud cities," and an asymmetric grid of project photographs.
+            Renovation and remodelling project sheet: a stark white layout with a light lowercase wordmark, a thin headline,
+            "Old buildings, new standards," and an asymmetric grid of refurbished buildings.
           </figcaption>
         </figure>
 
         <dl class="concept__notes">
-          <div><dt>Idea</dt><dd>Let the work breathe. White space does the selling; type stays out of the way.</dd></div>
-          <div><dt>Signature</dt><dd>Project titles rise from hairline masks; images sharpen to colour on hover.</dd></div>
-          <div><dt>Built for</dt><dd>Clients and competition juries who judge a practice by its restraint.</dd></div>
+          <div><dt>The brief</dt><dd>Tired buildings brought back to full value: new structure, services and finishes.</dd></div>
+          <div><dt>Engineering</dt><dd>Surveys and load checks before strip-out, so the scope is fixed before work starts.</dd></div>
+          <div><dt>Built for</dt><dd>Owners and landlords upgrading a home, a block or a whole portfolio.</dd></div>
         </dl>
       </article>
     </div>
@@ -327,6 +330,8 @@ const cRail = pic('c-rail', [600, 900], '(min-width: 1024px) 22vw, 44vw');
 
   /* ── Desktop horizontal track (class added by JS only when motion is allowed) ── */
   :global(.concepts.is-horizontal) .concepts__pin {
+    position: sticky; /* pinned without a JS position switch, so no layout shift */
+    top: 0;
     height: 100svh;
     padding: 0;
     display: flex;

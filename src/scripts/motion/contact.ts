@@ -58,7 +58,7 @@ export function initContactForm() {
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success !== false) {
         form.reset();
-        status.textContent = 'Thank you — your enquiry is in. We’ll be in touch shortly.';
+        status.textContent = 'Thank you — your quote request is in. We’ll be in touch to arrange a site visit.';
       } else {
         status.textContent = 'Something went wrong sending the form. Please email or WhatsApp us instead.';
       }

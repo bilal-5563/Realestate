@@ -5,7 +5,7 @@
    ───────────────────────────────────────────────────────────── */
 @font-face {
   font-family: 'Archivo';
-  src: url('/fonts/archivo-wdth.woff2') format('woff2-variations');
+  src: url('../assets/fonts/archivo-wdth.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-stretch: 62% 125%;
   font-style: normal;
@@ -13,22 +13,23 @@
 }
 @font-face {
   font-family: 'Instrument Sans';
-  src: url('/fonts/instrument-sans-wdth.woff2') format('woff2-variations');
-  font-weight: 400 700;
-  font-stretch: 75% 100%;
+  /* Static 400 / 100% instance of the variable font: the only style the site uses (scripts/subset-fonts.py) */
+  src: url('../assets/fonts/instrument-sans-400.woff2') format('woff2');
+  font-weight: 400;
+  font-stretch: 100%;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+  src: url('../assets/fonts/instrument-serif-italic.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: 'Instrument Serif';
-  src: url('/fonts/instrument-serif.woff2') format('woff2');
+  src: url('../assets/fonts/instrument-serif.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

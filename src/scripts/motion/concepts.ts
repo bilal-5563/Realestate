@@ -5,7 +5,7 @@ import { hideStroke } from './reveal';
 const DESKTOP = '(min-width: 1024px) and (prefers-reduced-motion: no-preference)';
 const STACK = '(max-width: 1023px) and (prefers-reduced-motion: no-preference)';
 
-/** Maison Aurel: slow cinematic crossfade between residences, timed like an edit. Paused until visible. */
+/** Villas panel: slow cinematic crossfade between residences, timed like an edit. Paused until visible. */
 function createCrossfade(root: HTMLElement) {
   const slides = gsap.utils.toArray<HTMLElement>('[data-slide]', root);
   const imgs = slides.map((s) => s.querySelector('img'));
@@ -28,7 +28,7 @@ function createCrossfade(root: HTMLElement) {
   return { play: () => tl.play(), pause: () => tl.pause(), kill: () => tl.kill() };
 }
 
-/** Halden: amber engineering callouts draw over the tower, labels follow. */
+/** Tower panel: amber engineering callouts draw over the tower, labels follow. */
 function calloutTimeline(root: HTMLElement) {
   const paths = root.querySelectorAll('[data-callout]');
   const labels = root.querySelectorAll('[data-callout-label]');
@@ -40,7 +40,7 @@ function calloutTimeline(root: HTMLElement) {
     .to(labels, { opacity: 1, duration: 0.5, stagger: 0.15 }, 0.7);
 }
 
-/** Atelier Nord: project titles rise from hairline masks. */
+/** Renovation panel: project titles rise from hairline masks. */
 function titlesTimeline(root: HTMLElement) {
   return gsap.fromTo(
     root.querySelectorAll('[data-c-title]'),
@@ -74,26 +74,36 @@ export function initConcepts() {
     });
     const distance = () => track.scrollWidth - window.innerWidth;
 
+    // Pinned with CSS `position: sticky` (see Concepts.astro) instead of a ScrollTrigger pin: a JS pin
+    // switches the panel to position:fixed mid-scroll, which browsers report as a layout shift (CLS ≈ 2).
+    // The spacer supplies the scroll distance; the panel is one viewport tall, so "spacer top at the
+    // viewport bottom" is exactly "panel top at the viewport top".
+    const spacer = document.createElement('div');
+    spacer.setAttribute('aria-hidden', 'true');
+    pin.after(spacer);
+    const setSpace = () => (spacer.style.height = `${Math.max(0, distance())}px`);
+    setSpace();
+
     const move = gsap.to(track, {
       x: () => -distance(),
       ease: 'none',
       scrollTrigger: {
-        trigger: pin,
-        start: 'top top',
-        end: () => `+=${distance()}`,
-        pin: true,
+        trigger: spacer,
+        start: 'top bottom',
+        end: 'bottom bottom',
         scrub: 0.9,
-        anticipatePin: 1,
         invalidateOnRefresh: true,
+        onRefreshInit: setSpace,
         onUpdate: (self) => {
           if (bar) gsap.set(bar, { scaleX: self.progress });
-          if (label) label.textContent = `Concept ${self.progress < 0.33 ? 'A' : self.progress < 0.72 ? 'B' : 'C'}`;
+          if (label) label.textContent = `Project ${self.progress < 0.33 ? 'A' : self.progress < 0.72 ? 'B' : 'C'}`;
         },
       },
     });
 
     const callouts = calloutTimeline(a);
-    ScrollTrigger.create({ trigger: pin, start: 'top 55%', once: true, onEnter: () => callouts.play() });
+    // = the panel's top reaching 55% of the viewport (the panel sits one viewport above the spacer)
+    ScrollTrigger.create({ trigger: spacer, start: 'top 155%', once: true, onEnter: () => callouts.play() });
 
     const fade = createCrossfade(b.querySelector('[data-crossfade]')!);
     ScrollTrigger.create({
@@ -109,12 +119,13 @@ export function initConcepts() {
 
     return () => {
       fade.kill();
+      spacer.remove();
       section.classList.remove('is-horizontal');
       gsap.set(track, { clearProps: 'transform' });
     };
   });
 
-  // ── Mobile / tablet: vertical stack, each concept animates as it arrives.
+  // ── Mobile / tablet: vertical stack, each project animates as it arrives.
   mm.add(STACK, () => {
     const callouts = calloutTimeline(a);
     ScrollTrigger.create({ trigger: a.querySelector('.cframe'), start: 'top 70%', once: true, onEnter: () => callouts.play() });

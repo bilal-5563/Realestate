@@ -2,8 +2,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { hideStroke } from './reveal';
 
-const NAMES = ['Foundation', 'Frame', 'Envelope', 'Handover'];
-
 /**
  * Process: the building section draws itself layer by layer as each step becomes active.
  * Scroll back and the layer is erased again — the drawing always matches where you are.
@@ -17,6 +15,8 @@ export function initProcess() {
   const stageName = section.querySelector<HTMLElement>('[data-stage-name]');
   const stageN = section.querySelector<HTMLElement>('[data-stage-n]');
   const rail = section.querySelector<HTMLElement>('[data-process-rail]');
+  const names = steps.map((s) => s.dataset.stage ?? '');
+  const pad = (n: number) => String(n).padStart(2, '0');
   const mm = gsap.matchMedia();
 
   mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -35,8 +35,8 @@ export function initProcess() {
 
     const setStage = (i: number) => {
       steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
-      if (stageName) stageName.textContent = NAMES[i];
-      if (stageN) stageN.textContent = `0${i + 1}`;
+      if (stageName) stageName.textContent = names[i];
+      if (stageN) stageN.textContent = pad(i + 1);
     };
 
     steps.forEach((step, i) => {
@@ -72,6 +72,6 @@ export function initProcess() {
   mm.add('(prefers-reduced-motion: reduce)', () => {
     steps.forEach((s) => s.classList.add('is-active'));
     if (stageName) stageName.textContent = 'Complete';
-    if (stageN) stageN.textContent = '04';
+    if (stageN) stageN.textContent = pad(steps.length);
   });
 }

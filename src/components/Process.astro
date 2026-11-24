@@ -5,11 +5,13 @@ const cols = [130, 230, 330, 430, 510];
 const levels = Array.from({ length: FLOORS + 1 }, (_, i) => GROUND - SLAB - i * STOREY); // 428, 348, 268, 188, 108
 const top = levels[FLOORS];
 
+// Site study: the ground line and the soil hatch
+const survey = [`M16 ${GROUND} H624`, Array.from({ length: 22 }, (_, i) => `M${30 + i * 27} ${GROUND + 10} l14 -10`).join(' ')];
+// Design: the building's overall height, set out before anything is built
+const design = [`M566 ${GROUND - SLAB} V${top - 26} M558 ${GROUND - SLAB + 8} l16 -16 M558 ${top - 18} l16 -16`];
 const foundation = [
-  `M16 ${GROUND} H624`,
   `M${L} ${GROUND - SLAB} H${R} V${GROUND} M${L} ${GROUND - SLAB} V${GROUND}`,
   cols.map((x) => `M${x} ${GROUND} V${GROUND + 78} M${x - 14} ${GROUND + 78} H${x + 14}`).join(' '),
-  Array.from({ length: 22 }, (_, i) => `M${30 + i * 27} ${GROUND + 10} l14 -10`).join(' '),
 ];
 const frame = [
   cols.map((x) => `M${x} ${GROUND - SLAB} V${top}`).join(' '),
@@ -36,49 +38,62 @@ const handover = [
   `M70 ${GROUND} V${GROUND - 46} M70 ${GROUND - 70} a22 26 0 1 1 0.1 0 M574 ${GROUND} V${GROUND - 38} M574 ${GROUND - 58} a18 20 0 1 1 0.1 0`,
   // people for scale
   `M248 ${GROUND - SLAB - 6} l5 -24 l5 24 M253 ${GROUND - SLAB - 30} v-12 M253 ${GROUND - SLAB - 47} a5 5 0 1 1 0.1 0 M272 ${GROUND - SLAB - 6} l4 -20 l4 20 M276 ${GROUND - SLAB - 26} v-10 M276 ${GROUND - SLAB - 40} a4 4 0 1 1 0.1 0`,
-  // overall height dimension
-  `M566 ${GROUND - SLAB} V${top - 26} M558 ${GROUND - SLAB + 8} l16 -16 M558 ${top - 18} l16 -16`,
 ];
 
+// Timings are typical ranges, not guarantees: every programme is set per project after the site study.
 const steps = [
   {
-    layer: 'Foundation',
-    title: 'Discovery & strategy',
-    time: 'Week 1',
-    body: 'We study your projects, buyers and competitors, then agree the sitemap, content plan and what success looks like.',
-    items: ['Workshop', 'Sitemap', 'Content plan'],
+    layer: 'Site study',
+    title: 'Consultation',
+    time: '1–2 weeks',
+    body: 'We walk the plot with you, survey the ground and pin down the brief, budget and constraints before anything is drawn.',
+    items: ['Site visit', 'Soil survey', 'Brief'],
+  },
+  {
+    layer: 'Planning',
+    title: 'Design',
+    time: '4–8 weeks',
+    body: 'Architecture, structure and services designed together, priced line by line and submitted for approvals.',
+    items: ['Drawings', 'Fixed quote', 'Permits'],
+  },
+  {
+    layer: 'Footings',
+    title: 'Foundation',
+    time: '4–10 weeks',
+    body: 'Excavation, piling and the ground slab, each inspected and signed off before a single column goes up.',
+    items: ['Excavation', 'Piling', 'Ground slab'],
   },
   {
     layer: 'Frame',
-    title: 'Design',
-    time: 'Weeks 1–3',
-    body: 'Art direction, typography and every key page designed for phone, tablet and desktop. Your first draft lands within seven days.',
-    items: ['Art direction', 'Page designs', 'Prototype'],
+    title: 'Structure',
+    time: 'Varies by size',
+    body: 'The frame rises floor by floor, checked against the drawings at every pour, with progress photos every week.',
+    items: ['Concrete frame', 'Steel', 'QA checks'],
   },
   {
     layer: 'Envelope',
-    title: 'Build',
-    time: 'Weeks 3–6',
-    body: 'Hand-built in Astro with motion, a CMS where you need one, and a performance budget enforced on every page.',
-    items: ['Development', 'Motion', 'CMS'],
+    title: 'Finishing',
+    time: '3–6 months',
+    body: "Façade, services, joinery and finishes, installed in sequence by trades who've built with us for years.",
+    items: ['Façade', 'MEP', 'Interiors'],
   },
   {
-    layer: 'Handover',
-    title: 'Launch & care',
-    time: 'Week 6 onward',
-    body: 'SEO, analytics and training for your team, then a month of quiet tuning once real visitors arrive.',
-    items: ['SEO', 'Training', 'Aftercare'],
+    layer: 'Keys',
+    title: 'Handover',
+    time: '2–3 weeks',
+    body: 'Snag list closed, systems tested and documents handed over, then a defects period in which we come back if anything needs us.',
+    items: ['Snagging', 'Testing', 'Warranty'],
   },
 ];
-const layers = [foundation, frame, envelope, handover];
+const layers = [survey, design, foundation, frame, envelope, handover];
 ---
 
 <section id="process" class="process relative bg-graphite text-bone" aria-labelledby="process-title" data-process>
   <div class="grid-site pt-s6 lg:pt-s7">
-    <p class="col-span-full md:col-span-4 type-label text-concrete"><span class="text-markup-pale">(05)</span>&ensp;Process</p>
-    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-concrete">Four stages · Six weeks typical</p>
+    <p class="col-span-full md:col-span-4 type-label text-concrete"><span class="text-markup-pale">(05)</span>&ensp;Our process</p>
+    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-concrete">Six stages · Typical timings</p>
     <h2 id="process-title" class="process__title col-span-full lg:col-span-10 mt-s5" data-split-lines>
-      We build websites the way you build <span class="type-accent text-markup-pale">buildings.</span>
+      From bare ground to <span class="type-accent text-markup-pale">handover.</span>
     </h2>
   </div>
 
@@ -99,7 +114,7 @@ const layers = [foundation, frame, envelope, handover];
         </svg>
         <div class="process__sheetmeta type-label">
           <span>Section A–A · <span data-stage-name>{steps[0].layer}</span></span>
-          <span><span data-stage-n>01</span> / 04</span>
+          <span><span data-stage-n>01</span> / {String(steps.length).padStart(2, '0')}</span>
         </div>
       </div>
     </div>
@@ -110,7 +125,7 @@ const layers = [foundation, frame, envelope, handover];
       <ol>
       {
         steps.map((s, i) => (
-          <li class="pstep" data-step={i}>
+          <li class="pstep" data-step={i} data-stage={s.layer}>
             <p class="type-label">
               <span class="text-markup-pale">0{i + 1}</span>&ensp;<span class="pstep__layer">{s.layer}</span>
               <span class="pstep__time">&ensp;·&ensp;{s.time}</span>

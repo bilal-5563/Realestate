@@ -1,11 +1,11 @@
 ---
-import { SITE, whatsappHref } from '../site.config';
+import { SITE, whatsappHref, telHref, addressLine } from '../site.config';
 const year = new Date().getFullYear();
 const nav = [
-  { href: '#work', label: 'Work' },
-  { href: '#capabilities', label: 'Capabilities' },
+  { href: '#work', label: 'Projects' },
+  { href: '#capabilities', label: 'What we build' },
   { href: '#process', label: 'Process' },
-  { href: '#why', label: 'Why Plinth' },
+  { href: '#why', label: 'Why SCALE IT' },
   { href: '#contact', label: 'Contact' },
 ];
 ---
@@ -14,10 +14,11 @@ const nav = [
   <h2 id="footer-title" class="sr-only">{SITE.legalName}</h2>
   <div class="grid-site pt-s6 pb-s4 gap-y-s5">
     <div class="col-span-full md:col-span-4 lg:col-span-4">
-      <p class="type-label text-concrete">Studio</p>
+      <p class="type-label text-concrete">Company</p>
       <p class="mt-s2 max-w-[30ch] text-bone/80">
-        Websites for construction companies, architecture studios and real estate developers.
+        Design-and-build contractor for luxury villas, commercial buildings, interiors and renovations.
       </p>
+      <p class="mt-s2 max-w-[30ch] text-bone/60">{addressLine}</p>
     </div>
     <div class="col-span-2 md:col-span-2 lg:col-span-2 lg:col-start-7">
       <p class="type-label text-concrete">Navigate</p>
@@ -29,6 +30,7 @@ const nav = [
       <p class="type-label text-concrete">Contact</p>
       <ul class="mt-s2 grid gap-1">
         <li><a class="footer__link" href={`mailto:${SITE.email}`}>Email</a></li>
+        <li><a class="footer__link whitespace-nowrap" href={telHref}>{SITE.phone}</a></li>
         <li><a class="footer__link" href={whatsappHref} target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a class="footer__link" href="/credits/">Image credits</a></li>
       </ul>
@@ -40,7 +42,7 @@ const nav = [
 
     <div class="col-span-full flex flex-wrap justify-between gap-s2 border-t border-line-dark pt-s3 type-label text-concrete">
       <span>© {year} {SITE.legalName}</span>
-      <span>Concept sites shown are fictional brands</span>
+      {SITE.demoNote && <span>{SITE.demoNote}</span>}
       <a href="#top" class="footer__link">Back to top ↑</a>
     </div>
   </div>
@@ -62,8 +64,9 @@ const nav = [
     font-weight: 800;
     font-stretch: 62%;
     text-transform: uppercase;
-    font-size: clamp(6rem, 31vw, 30rem);
+    font-size: clamp(5rem, 28vw, 30rem); /* sized so the two-word wordmark spans the grid on one line */
     line-height: 0.78;
+    white-space: nowrap;
     letter-spacing: -0.015em;
     margin-top: var(--spacing-s4);
   }

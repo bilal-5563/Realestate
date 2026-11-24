@@ -16,7 +16,7 @@ await page.waitForFunction(() => document.documentElement.classList.contains('is
 await page.evaluate(
   () =>
     new Promise((res) => {
-      window.addEventListener('plinth:scene-ready', res, { once: true });
+      window.addEventListener('scaleit:scene-ready', res, { once: true });
       setTimeout(res, 30000);
     }),
 );
