@@ -1,0 +1,278 @@
+---
+import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import HeroScene from './HeroScene.tsx';
+import GridLines from './GridLines.astro';
+import { SITE, whatsappHref } from '../site.config';
+---
+
+<section id="top" class="hero relative isolate overflow-hidden bg-ink" data-hero aria-labelledby="hero-title">
+  <GridLines tone="dark" />
+
+  <!-- Drawing annotations -->
+  <div class="hero__meta grid-site" data-hero-fade>
+    <p class="col-span-2 md:col-span-3 type-label text-concrete">
+      <span class="text-markup-light">(01)</span>&ensp;Studio
+    </p>
+    <p class="col-span-2 md:col-span-5 lg:col-span-5 lg:col-start-8 type-label text-right text-concrete whitespace-nowrap">
+      Fig. 01<span class="hidden md:inline"> — Cantilever House</span><span class="hidden xl:inline">, 1:200</span>
+    </p>
+  </div>
+
+  <!-- 3D stage: static render underneath; Spline fades in over it on capable desktops -->
+  <div class="hero__stage" data-hero-stage>
+    <picture>
+      <source
+        type="image/avif"
+        srcset="/images/hero-villa-900.avif 900w, /images/hero-villa-1600.avif 1600w"
+        sizes="(min-width: 1024px) 62vw, 100vw"
+      />
+      <source
+        type="image/webp"
+        srcset="/images/hero-villa-900.webp 900w, /images/hero-villa-1600.webp 1600w"
+        sizes="(min-width: 1024px) 62vw, 100vw"
+      />
+      <img
+        src="/images/hero-villa-1600.webp"
+        alt=""
+        width="1600"
+        height="860"
+        fetchpriority="high"
+        decoding="async"
+        class="hero__poster"
+      />
+    </picture>
+    <HeroScene client:media="(min-width: 1024px)" scene={SITE.splineScene} />
+    <div class="hero__vignette" aria-hidden="true"></div>
+  </div>
+
+  <!-- Plumb-line scroll cue (ref-04's crane hook, reduced to a line and a weight) -->
+  <a href="#intro" class="hero__cue" data-hero-fade data-cursor="Scroll" aria-label="Scroll to introduction">
+    <span class="hero__cue-line" aria-hidden="true"><i></i></span>
+    <span class="type-label hero__cue-label">Scroll</span>
+  </a>
+
+  <div class="hero__content grid-site">
+    <h1 id="hero-title" class="col-span-full lg:col-span-8 type-mega">
+      <span class="line-mask"><span class="block" data-hero-line>Websites</span></span>
+      <span class="line-mask pl-[9%] md:pl-[12.5%] lg:pl-[11%]">
+        <span class="block type-accent text-[0.94em] leading-[0.92]" data-hero-line>built like</span>
+      </span>
+      <span class="line-mask relative">
+        <span class="relative inline-block" data-hero-line>
+          landmarks.
+          <svg class="hero__markup" viewBox="0 0 800 24" preserveAspectRatio="none" aria-hidden="true">
+            <path
+              data-hero-markup
+              pathLength="1"
+              d="M4 15 C 140 6, 300 19, 450 10 S 690 9, 796 7"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="5"
+              stroke-linecap="round"></path>
+          </svg>
+        </span>
+      </span>
+    </h1>
+
+    <div class="col-span-full md:col-span-6 lg:col-span-4 lg:col-start-9 hero__aside" data-hero-fade>
+      <p class="max-w-[38ch] text-[1rem] leading-[1.55] text-bone/80 lg:text-[1.0625rem]">
+        We design and build premium websites for construction companies, architecture studios and real estate
+        developers — engineered to win tenders, sell units and earn trust before the first site visit.
+      </p>
+      <div class="mt-s3 grid gap-s1 sm:flex sm:flex-wrap">
+        <a href="#contact" class="btn btn--primary justify-between sm:justify-start" data-magnetic data-cursor="Talk">
+          <span class="btn__label" data-magnetic-inner>Start a project</span>
+          <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
+        </a>
+        <a
+          href={whatsappHref}
+          class="btn btn--ghost justify-between sm:justify-start"
+          target="_blank"
+          rel="noopener"
+          data-magnetic
+          data-cursor="Chat"
+        >
+          <span class="btn__label" data-magnetic-inner>WhatsApp</span>
+          <MessageCircle size={16} strokeWidth={1.5} aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── Mobile / tablet: a vertical sheet — annotations, drawing, then the statement ── */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5.25rem; /* clears the fixed nav */
+  }
+  .hero__meta {
+    position: relative;
+  }
+  .hero__stage {
+    position: relative;
+    z-index: -1;
+    margin-top: var(--spacing-s2);
+    aspect-ratio: 5 / 4;
+  }
+  .hero__content {
+    position: relative;
+    row-gap: var(--spacing-s4);
+    margin-top: calc(var(--spacing-s3) * -1); /* the headline overlaps the drawing's foot */
+    padding-bottom: var(--spacing-s5);
+  }
+  @media (width >= 48rem) {
+    .hero {
+      padding-top: 6rem;
+    }
+    .hero__stage {
+      aspect-ratio: 16 / 10;
+      margin-top: var(--spacing-s3);
+    }
+    .hero__content {
+      margin-top: calc(var(--spacing-s4) * -1);
+    }
+  }
+
+  /* ── Desktop: one composed frame — the model bleeds right, the statement anchors bottom-left ── */
+  @media (width >= 64rem) {
+    .hero {
+      height: 100svh;
+      min-height: 760px;
+      justify-content: flex-end;
+      padding-top: 0;
+    }
+    .hero__meta {
+      position: absolute;
+      inset-inline: 0;
+      top: 6rem;
+    }
+    .hero__stage {
+      position: absolute;
+      margin: 0;
+      aspect-ratio: auto;
+      top: 0;
+      bottom: 0;
+      left: 38%;
+      right: 0;
+    }
+    .hero__content {
+      margin: 0;
+      align-items: end;
+      padding-bottom: var(--spacing-s6); /* keeps the CTAs clear of the canvas's bottom-right corner */
+    }
+  }
+
+  .hero__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 40%;
+  }
+  /* The poster is the top 86% of a full-frame render: top-align it at 86% height so it
+     sits exactly where the live canvas draws the model — the crossfade doesn't jump. */
+  @media (width >= 64rem) {
+    .hero__poster {
+      height: 86%;
+      object-position: 50% 0%;
+      mask-image: linear-gradient(to bottom, #000 78%, transparent 100%);
+    }
+  }
+
+  /* Fades only where the stage meets content. On desktop the bottom-right corner stays untouched. */
+  .hero__vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to bottom, var(--color-ink) 0%, transparent 16%, transparent 72%, var(--color-ink) 100%);
+  }
+  @media (width >= 64rem) {
+    .hero__vignette {
+      background:
+        linear-gradient(to bottom, var(--color-ink) 0%, transparent 18%),
+        linear-gradient(to right, var(--color-ink) 0%, transparent 22%);
+    }
+  }
+  .hero__stage :global(canvas) {
+    pointer-events: none;
+  }
+
+  .hero__markup {
+    position: absolute;
+    left: -1%;
+    width: 102%;
+    bottom: -0.02em;
+    height: 0.12em;
+    color: var(--color-markup);
+    overflow: visible;
+  }
+  .hero__markup path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  :global(html.js.motion-ok) .hero__markup path {
+    stroke-dashoffset: 1;
+  }
+  :global(html.js.motion-ok) [data-hero-line] {
+    transform: translateY(108%);
+  }
+  :global(html.js.motion-ok) [data-hero-fade] {
+    opacity: 0;
+  }
+
+  /* Plumb line */
+  .hero__cue {
+    position: absolute;
+    left: var(--spacing-margin);
+    top: 9.5rem;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-concrete);
+  }
+  @media (width >= 64rem) {
+    .hero__cue {
+      display: flex;
+    }
+  }
+  .hero__cue-line {
+    position: relative;
+    width: 1px;
+    height: 88px;
+    background: var(--color-line-dark);
+    overflow: hidden;
+  }
+  .hero__cue-line i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: var(--color-markup-light);
+    animation: plumb 2.4s var(--ease-quart) infinite;
+  }
+  .hero__cue-label {
+    writing-mode: vertical-rl;
+    letter-spacing: 0.24em;
+  }
+  @keyframes plumb {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    48% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    52% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
+</style>

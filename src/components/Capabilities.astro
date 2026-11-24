@@ -1,0 +1,248 @@
+---
+import GridLines from './GridLines.astro';
+
+const rows = [
+  {
+    title: 'Web design',
+    body: 'Art direction, typography and layouts designed separately for phone, tablet and desktop. No templates, no page builders.',
+    tags: ['Art direction', 'UX', 'Content structure'],
+    img: 'c-white-480',
+    w: 480,
+    h: 600,
+  },
+  {
+    title: 'Development',
+    body: 'Hand-built with Astro and modern CSS. Clean, accessible code you own outright, with a CMS where your team needs one.',
+    tags: ['Astro', 'CMS', 'Integrations'],
+    img: 'a-weld-600',
+    w: 600,
+    h: 399,
+  },
+  {
+    title: 'Animation',
+    body: 'Motion with a job to do — scroll stories, 3D models, transitions between projects. Never decoration for its own sake.',
+    tags: ['GSAP', '3D', 'Scroll'],
+    img: 'b-pool-640',
+    w: 640,
+    h: 427,
+  },
+  {
+    title: 'Responsive',
+    body: 'Touch-first layouts for the phone in a site office, scaled up with care — not desktop pages squeezed down.',
+    tags: ['Mobile', 'Tablet', 'Touch'],
+    img: 'b-living-640',
+    w: 640,
+    h: 427,
+  },
+  {
+    title: 'Performance',
+    body: 'Image pipelines, lazy loading and a budget on every page. We build to a 90+ Lighthouse performance score on mobile.',
+    tags: ['Core Web Vitals', 'AVIF', 'Budgets'],
+    img: 'why-stair-600',
+    w: 600,
+    h: 750,
+  },
+  {
+    title: 'SEO',
+    body: 'Semantic structure, structured data, sitemaps and the local-search basics done properly from the first commit.',
+    tags: ['Schema', 'Local search', 'Analytics'],
+    img: 'intro-frame-720',
+    w: 720,
+    h: 432,
+  },
+];
+---
+
+<section id="capabilities" class="caps on-light relative bg-bone text-ink" aria-labelledby="caps-title" data-caps>
+  <GridLines tone="light" />
+  <div class="grid-site relative pt-s6 pb-s6 lg:pt-s7 lg:pb-s7">
+    <p class="col-span-full md:col-span-4 type-label text-stone"><span class="text-markup">(04)</span>&ensp;Capabilities</p>
+    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-stone">Specification · Sheet 04</p>
+
+    <h2 id="caps-title" class="caps__title col-span-full lg:col-span-10 mt-s5" data-split-lines>
+      Everything a serious project website needs. <span class="type-accent text-markup">Nothing it doesn't.</span>
+    </h2>
+
+    <ol class="caps__list col-span-full mt-s5 lg:mt-s6" data-caps-list>
+      {
+        rows.map((r, i) => (
+          <li class="cap" data-cap data-index={i}>
+            <span class="cap__rule" aria-hidden="true" data-cap-rule />
+            <span class="cap__n type-label">04.{i + 1}</span>
+            <h3 class="cap__title">{r.title}</h3>
+            <p class="cap__body">{r.body}</p>
+            <ul class="cap__tags" aria-label={`${r.title} — includes`}>
+              {r.tags.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
+    <span class="cap__rule cap__rule--end col-span-full" aria-hidden="true"></span>
+  </div>
+
+  <!-- Hover preview (desktop, fine pointer only) -->
+  <div class="caps__preview" aria-hidden="true" data-caps-preview>
+    {
+      rows.map((r) => (
+        <picture data-caps-img>
+          <source type="image/avif" srcset={`/images/${r.img}.avif`} />
+          <img src={`/images/${r.img}.webp`} width={r.w} height={r.h} loading="lazy" decoding="async" alt="" />
+        </picture>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .caps__title {
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-stretch: 72%;
+    font-size: clamp(2.375rem, 5.4vw, 5.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.012em;
+  }
+
+  .caps__list {
+    display: grid;
+  }
+  .cap {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: var(--spacing-s3);
+    row-gap: var(--spacing-s2);
+    padding-block: var(--spacing-s4);
+  }
+  .cap__rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: var(--color-line-light);
+    transform-origin: left;
+  }
+  .cap__rule--end {
+    position: relative;
+    display: block;
+  }
+  .cap__n {
+    color: var(--color-stone);
+    transition: color 0.5s var(--ease-expo);
+  }
+  .cap__title {
+    font-family: var(--font-display);
+    font-weight: 750;
+    font-stretch: 68%;
+    text-transform: uppercase;
+    font-size: clamp(2.5rem, 6.4vw, 6.25rem);
+    line-height: 0.86;
+    /* hover shift uses the independent `translate` property — GSAP's reveal owns `transform` */
+    transition:
+      translate 0.7s var(--ease-expo),
+      color 0.5s var(--ease-expo);
+  }
+  .cap__body {
+    grid-column: 1 / -1;
+    max-width: 46ch;
+    color: var(--color-stone);
+  }
+  .cap__tags {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .cap__tags li {
+    font-family: var(--font-display);
+    font-stretch: 125%;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--color-line-light);
+    color: var(--color-stone);
+  }
+
+  @media (width >= 48rem) {
+    .cap {
+      grid-template-columns: 5rem 1fr 1fr;
+      align-items: start;
+    }
+    .cap__n {
+      padding-top: 0.6em;
+    }
+    .cap__body {
+      grid-column: 3;
+      grid-row: 1;
+      padding-top: 0.5rem;
+    }
+    .cap__tags {
+      grid-column: 3;
+    }
+  }
+  @media (width >= 64rem) {
+    .cap {
+      grid-template-columns: 1fr 5fr 4fr 2fr;
+      column-gap: var(--spacing-gutter);
+      align-items: center;
+      padding-block: var(--spacing-s3);
+    }
+    .cap__n {
+      padding-top: 0;
+    }
+    .cap__body {
+      grid-column: 3;
+      padding-top: 0;
+    }
+    .cap__tags {
+      grid-column: 4;
+      grid-row: 1;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.35rem;
+    }
+    .cap__tags li {
+      border: 0;
+      padding: 0;
+    }
+    .cap:hover .cap__title {
+      translate: 1.5vw 0;
+      color: var(--color-markup);
+    }
+    .cap:hover .cap__n {
+      color: var(--color-markup);
+    }
+  }
+
+  /* Floating preview */
+  .caps__preview {
+    display: none;
+  }
+  :global(html.has-cursor) .caps__preview {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    width: clamp(220px, 19vw, 320px);
+    aspect-ratio: 4 / 5;
+    pointer-events: none;
+    overflow: hidden;
+    clip-path: inset(50% 50% 50% 50%);
+  }
+  .caps__preview picture {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+  .caps__preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

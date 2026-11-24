@@ -1,0 +1,82 @@
+<div class="cursor" aria-hidden="true" data-cursor-root>
+  <div class="cursor__ring" data-cursor-ring><span class="cursor__label type-label" data-cursor-label></span></div>
+  <div class="cursor__dot" data-cursor-dot><i></i><i></i></div>
+</div>
+
+<style>
+  .cursor {
+    display: none;
+  }
+  :global(html.has-cursor) .cursor {
+    display: block;
+  }
+  .cursor > div {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 150;
+    pointer-events: none;
+    will-change: transform;
+  }
+  /* Crosshair — a surveyor's mark */
+  .cursor__dot {
+    width: 0;
+    height: 0;
+    mix-blend-mode: difference;
+    color: #f7f5f1;
+  }
+  .cursor__dot i {
+    position: absolute;
+    background: currentColor;
+  }
+  .cursor__dot i:first-child {
+    width: 15px;
+    height: 1px;
+    left: -7px;
+    top: 0;
+  }
+  .cursor__dot i:last-child {
+    width: 1px;
+    height: 15px;
+    left: 0;
+    top: -7px;
+  }
+  .cursor__ring {
+    width: 44px;
+    height: 44px;
+    margin: -22px 0 0 -22px;
+    border: 1px solid rgb(91 107 255 / 0.7);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition:
+      width 0.5s var(--ease-expo),
+      height 0.5s var(--ease-expo),
+      margin 0.5s var(--ease-expo),
+      background-color 0.5s var(--ease-expo),
+      border-color 0.5s var(--ease-expo),
+      opacity 0.3s;
+  }
+  .cursor__label {
+    color: var(--color-bone);
+    font-size: 0.625rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  :global(html.cursor-active) .cursor__ring {
+    width: 88px;
+    height: 88px;
+    margin: -44px 0 0 -44px;
+    background: var(--color-markup);
+    border-color: var(--color-markup);
+  }
+  :global(html.cursor-active) .cursor__label {
+    opacity: 1;
+  }
+  :global(html.cursor-active) .cursor__dot {
+    opacity: 0;
+  }
+  :global(html.cursor-hidden) .cursor > div {
+    opacity: 0;
+  }
+</style>

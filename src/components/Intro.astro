@@ -1,0 +1,306 @@
+---
+import GridLines from './GridLines.astro';
+import { STATS } from '../site.config';
+
+const shifts = [
+  { n: '01', area: 'Credibility', before: 'A brochure site', after: 'A portfolio that wins tenders.' },
+  { n: '02', area: 'Sales', before: 'PDF price lists', after: 'Property pages that sell off-plan.' },
+  { n: '03', area: 'Enquiries', before: 'An unanswered form', after: 'A direct line to your sales team.' },
+];
+
+/* Markup overlay: drawn in the crop's own pixel space (1340 × 1675) so it locks to the photo. */
+const VB = { w: 1340, h: 1675 };
+const pct = (x: number, y: number) => `left:${((x / VB.w) * 100).toFixed(2)}%;top:${((y / VB.h) * 100).toFixed(2)}%`;
+---
+
+<section id="intro" class="intro on-light relative bg-haze text-ink" aria-labelledby="intro-title">
+  <GridLines tone="light" />
+
+  <div class="grid-site relative pt-s6 pb-s6 lg:pt-s7 lg:pb-s7">
+    <!-- Section marker -->
+    <p class="col-span-full md:col-span-4 type-label text-stone">
+      <span class="text-markup">(02)</span>&ensp;Introduction
+    </p>
+    <p class="hidden md:block md:col-span-4 lg:col-span-4 lg:col-start-9 type-label text-right text-stone">
+      Studio for the built world
+    </p>
+
+    <!-- Statement -->
+    <h2 id="intro-title" class="intro__statement col-span-full lg:col-span-11 mt-s5 lg:mt-s6" data-split-lines>
+      Your projects are engineered to the <span class="type-accent">millimetre.</span> Your website should be too.
+    </h2>
+
+    <!-- Marked-up photograph -->
+    <figure class="intro__figure col-span-full md:col-span-4 lg:col-span-5 mt-s5 lg:mt-s6" data-markup-figure>
+      <div class="intro__frame" data-reveal-img>
+        <picture>
+          <source
+            type="image/avif"
+            srcset="/images/intro-crane-560.avif 560w, /images/intro-crane-900.avif 900w, /images/intro-crane-1340.avif 1340w"
+            sizes="(min-width: 1024px) 40vw, (min-width: 768px) 48vw, 92vw"
+          />
+          <img
+            src="/images/intro-crane-900.webp"
+            srcset="/images/intro-crane-560.webp 560w, /images/intro-crane-900.webp 900w, /images/intro-crane-1340.webp 1340w"
+            sizes="(min-width: 1024px) 40vw, (min-width: 768px) 48vw, 92vw"
+            width="1340"
+            height="1675"
+            loading="lazy"
+            decoding="async"
+            alt="Construction crew working on a reinforced-concrete floor as a crane lowers its hook, silhouetted against a pale sky"
+            data-scale-img
+          />
+        </picture>
+
+        <svg class="intro__markup" viewBox={`0 0 ${VB.w} ${VB.h}`} aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke">
+            <!-- Slab datum -->
+            <path data-markup pathLength="1" d="M28 1303 H1312" vector-effect="non-scaling-stroke" />
+            <!-- Column centreline + grid bubble -->
+            <path data-markup pathLength="1" d="M253 1303 V840" vector-effect="non-scaling-stroke" />
+            <path data-markup pathLength="1" d="M253 760 a40 40 0 1 1 -0.1 0" vector-effect="non-scaling-stroke" />
+            <!-- Rebar height dimension with architectural ticks -->
+            <path data-markup pathLength="1" d="M1010 916 V1303 M990 936 L1030 896 M990 1323 L1030 1283" vector-effect="non-scaling-stroke" />
+            <!-- Hand-drawn ring around the worker, leader to note -->
+            <path
+              data-markup
+              pathLength="1"
+              d="M560 958 C 660 962, 672 1090, 640 1180 C 610 1262, 488 1268, 462 1170 C 436 1074, 470 972, 572 952 C 600 948, 622 952, 634 960"
+              stroke-width="3"
+              vector-effect="non-scaling-stroke"></path>
+            <path data-markup pathLength="1" d="M640 990 L870 760 H1210" vector-effect="non-scaling-stroke" />
+          </g>
+        </svg>
+
+        <span class="intro__tag intro__tag--bubble" style={pct(253, 800)} data-markup-label>A</span>
+        <span class="intro__tag" style={pct(1050, 1080)} data-markup-label>3.20</span>
+        <span class="intro__tag" style={pct(880, 700)} data-markup-label>Human scale</span>
+        <span class="intro__tag intro__tag--dark" style={pct(40, 1330)} data-markup-label>FFL +24.60</span>
+      </div>
+      <figcaption class="mt-s2 flex flex-wrap justify-between gap-x-s2 gap-y-1 type-label text-stone">
+        <span class="whitespace-nowrap">Fig. 02 — Top slab</span>
+        <span class="whitespace-nowrap">Photo: A. Evstafev</span>
+      </figcaption>
+    </figure>
+
+    <!-- Intro copy + what changes -->
+    <div class="col-span-full md:col-span-4 md:col-start-5 lg:col-span-5 lg:col-start-8 mt-s5 lg:mt-s6 flex flex-col">
+      <p class="type-lead text-ink" data-fade-up>
+        Plinth is a small studio of designers and developers who work only with the built environment. We turn
+        project archives, floor plans and site photography into websites that do what your best salesperson does:
+        explain the work, prove the quality and start the conversation.
+      </p>
+
+      <p class="mt-s5 type-label text-stone" data-fade-up>What changes</p>
+      <ol class="mt-s2 border-t border-line-light" data-shifts>
+        {
+          shifts.map((s) => (
+            <li class="intro__shift border-b border-line-light py-s3" data-shift>
+              <div class="flex items-baseline justify-between gap-s2">
+                <span class="type-label text-stone">
+                  <span class="text-markup">{s.n}</span>&ensp;{s.area}
+                </span>
+              </div>
+              <p class="mt-s1 text-stone">
+                <span class="intro__before relative inline-block">
+                  <span class="sr-only">Before: </span>
+                  {s.before}
+                  <svg class="intro__strike" viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true">
+                    <path data-strike pathLength="1" d="M0 6 C 30 3, 70 8, 100 4" />
+                  </svg>
+                </span>
+              </p>
+              <p class="intro__after mt-1">
+                <span class="sr-only">After: </span>
+                {s.after}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <figure class="intro__detail mt-s5 hidden lg:block self-end" data-parallax>
+        <picture>
+          <source type="image/avif" srcset="/images/intro-frame-720.avif 720w, /images/intro-frame-1200.avif 1200w" sizes="(min-width: 1024px) 24vw, 40vw" />
+          <img
+            src="/images/intro-frame-720.webp"
+            srcset="/images/intro-frame-720.webp 720w, /images/intro-frame-1200.webp 1200w"
+            sizes="(min-width: 1024px) 24vw, 40vw"
+            width="1200"
+            height="720"
+            loading="lazy"
+            decoding="async"
+            alt="Concrete frame of a high-rise under construction, seen from below with safety netting between floors"
+          />
+        </picture>
+        <figcaption class="mt-s1 type-label text-stone">Photo: Brunxs</figcaption>
+      </figure>
+    </div>
+
+    <!-- Numbers, set like dimension annotations -->
+    <dl class="intro__stats col-span-full mt-s6 grid grid-cols-2 lg:grid-cols-4 gap-x-gutter gap-y-s5" data-stats>
+      {
+        STATS.map((s) => (
+          <div class="intro__stat" data-stat>
+            <div class="intro__dim" aria-hidden="true">
+              <i class="intro__dim-tick" data-dim-tick />
+              <i class="intro__dim-line" data-dim-line />
+              <i class="intro__dim-tick intro__dim-tick--end" data-dim-tick />
+            </div>
+            <dt class="sr-only">{s.label}</dt>
+            <dd class="intro__num" data-count-to={s.value} data-decimals={s.decimals}>
+              <span data-count-value>{s.value.toFixed(s.decimals)}</span>
+              <span class="intro__suffix">{s.suffix}</span>
+            </dd>
+            <dd class="mt-s2 max-w-[26ch] text-[0.9375rem] leading-[1.45] text-stone" aria-hidden="true">
+              {s.label}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .intro__statement {
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-stretch: 72%;
+    font-size: clamp(2.375rem, 5.9vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  .intro__statement .type-accent {
+    font-size: 1.04em;
+    color: var(--color-markup);
+  }
+
+  /* Photograph */
+  .intro__frame {
+    position: relative;
+    aspect-ratio: 1340 / 1675;
+    overflow: hidden;
+    background: #cfc8bd;
+  }
+  .intro__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .intro__markup {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--color-markup);
+    pointer-events: none;
+  }
+  .intro__tag {
+    position: absolute;
+    transform: translate(0, -100%);
+    font-family: var(--font-display);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-stretch: 125%;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-markup);
+    white-space: nowrap;
+  }
+  @media (width < 48rem) {
+    .intro__tag {
+      font-size: 0.5625rem;
+    }
+  }
+  .intro__tag--bubble {
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+  .intro__tag--dark {
+    transform: none;
+    color: var(--color-bone);
+    opacity: 0.85;
+  }
+
+  /* What changes */
+  .intro__before {
+    text-decoration: none;
+  }
+  .intro__strike {
+    position: absolute;
+    left: -2%;
+    width: 104%;
+    top: 50%;
+    height: 0.6em;
+    transform: translateY(-50%);
+    overflow: visible;
+    color: var(--color-markup);
+  }
+  .intro__strike path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+  }
+  .intro__after {
+    font-family: var(--font-display);
+    font-size: clamp(1.375rem, 2vw, 1.875rem);
+    line-height: 1.1;
+    font-weight: 600;
+    font-stretch: 80%;
+  }
+
+  .intro__detail {
+    width: min(100%, 22rem);
+  }
+  .intro__detail img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Numbers — dimension line: a rule between two end ticks */
+  .intro__dim {
+    position: relative;
+    height: 13px;
+  }
+  .intro__dim-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 5.75px;
+    height: 1.5px;
+    background: var(--color-markup);
+    transform-origin: left center;
+  }
+  .intro__dim-tick {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5px;
+    height: 13px;
+    background: var(--color-markup);
+  }
+  .intro__dim-tick--end {
+    left: auto;
+    right: 0;
+  }
+  .intro__num {
+    margin-top: var(--spacing-s3);
+    display: flex;
+    align-items: baseline;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 62%;
+    font-size: clamp(4rem, 9vw, 9rem);
+    line-height: 0.82;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .intro__suffix {
+    font-size: 0.5em;
+    margin-left: 0.04em;
+    color: var(--color-markup);
+  }
+</style>

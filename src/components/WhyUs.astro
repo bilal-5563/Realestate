@@ -1,0 +1,233 @@
+---
+import GridLines from './GridLines.astro';
+
+const pillars = [
+  {
+    area: 'Creativity',
+    title: 'Art direction, not templates.',
+    body: 'Every site gets its own identity, built around your projects, your buyers and your market — the way a building is designed for its plot.',
+    spec: 'One concept, fully developed',
+  },
+  {
+    area: 'Performance',
+    title: 'Fast on a site-office 4G.',
+    body: 'Image pipelines, lazy loading and lean code keep pages light. We build to a 90+ Lighthouse performance score on mobile and measure before launch.',
+    spec: 'Measured before handover',
+  },
+  {
+    area: 'Responsive design',
+    title: 'Designed for the phone in the hard hat.',
+    body: 'Phone, tablet and desktop each get a layout of their own, with touch targets sized for gloves-off thumbs, tested on real devices.',
+    spec: 'Three layouts, not one squeezed',
+  },
+  {
+    area: 'Premium UX',
+    title: 'The calm of a well-run site.',
+    body: 'Clear routes to an enquiry, keyboard and screen-reader friendly, and motion that steps back for anyone who prefers less of it.',
+    spec: 'Accessibility built in',
+  },
+];
+---
+
+<section id="why" class="why on-light relative bg-haze text-ink" aria-labelledby="why-title" data-why>
+  <GridLines tone="light" />
+  <div class="grid-site relative pt-s6 lg:pt-s7">
+    <p class="col-span-full md:col-span-4 type-label text-stone"><span class="text-markup">(06)</span>&ensp;Why Plinth</p>
+    <p class="hidden md:block md:col-span-4 lg:col-start-9 type-label text-right text-stone">Specialists, not generalists</p>
+    <h2 id="why-title" class="why__title col-span-full lg:col-span-10 mt-s5" data-split-lines>
+      Built by people who read <span class="type-accent text-markup">drawings.</span>
+    </h2>
+  </div>
+
+  <!-- Scroll-scaled photograph: opens from an inset frame to full bleed -->
+  <figure class="why__wide mt-s5 lg:mt-s6" data-why-wide>
+    <div class="why__wide-frame" data-why-clip>
+      <picture>
+        <source type="image/avif" srcset="/images/why-steps-720.avif 720w, /images/why-steps-1200.avif 1200w, /images/why-steps-1800.avif 1800w" sizes="100vw" />
+        <img
+          src="/images/why-steps-1200.webp"
+          srcset="/images/why-steps-720.webp 720w, /images/why-steps-1200.webp 1200w, /images/why-steps-1800.webp 1800w"
+          sizes="100vw"
+          width="1800"
+          height="1200"
+          loading="lazy"
+          decoding="async"
+          alt="Concrete steps in hard sunlight, each tread casting a sharp shadow on the next"
+          data-why-img
+        />
+      </picture>
+    </div>
+    <figcaption class="grid-site mt-s2 type-label text-stone">
+      <span class="col-span-full md:col-span-4">Fig. 06 — Rise 150 · Going 300</span>
+      <span class="col-span-full md:col-span-4 lg:col-start-9 md:text-right">Photo: Jan van der Wolf</span>
+    </figcaption>
+  </figure>
+
+  <div class="why__grid grid-site relative pt-s6 pb-s6 lg:pt-s7 lg:pb-s7">
+    {
+      pillars.map((p, i) => (
+        <article class:list={['pillar', `pillar--${i + 1}`]} data-pillar>
+          <span class="pillar__rule" aria-hidden="true" data-pillar-rule />
+          <p class="type-label text-stone">
+            <span class="text-markup">0{i + 1}</span>&ensp;{p.area}
+          </p>
+          <h3 class="pillar__title">{p.title}</h3>
+          <p class="pillar__body">{p.body}</p>
+          <p class="pillar__spec type-label">{p.spec}</p>
+        </article>
+      ))
+    }
+
+    <figure class="why__portrait" data-why-portrait>
+      <div class="why__portrait-frame">
+        <picture>
+          <source type="image/avif" srcset="/images/why-stair-600.avif 600w, /images/why-stair-900.avif 900w" sizes="(min-width: 1024px) 34vw, (min-width: 768px) 46vw, 92vw" />
+          <img
+            src="/images/why-stair-600.webp"
+            srcset="/images/why-stair-600.webp 600w, /images/why-stair-900.webp 900w"
+            sizes="(min-width: 1024px) 34vw, (min-width: 768px) 46vw, 92vw"
+            width="900"
+            height="1125"
+            loading="lazy"
+            decoding="async"
+            alt="A concrete stair rising toward a narrow slot of daylight"
+            data-why-portrait-img
+          />
+        </picture>
+      </div>
+      <figcaption class="mt-s2 type-label text-stone">Photo: joao Guerreiro</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .why__title {
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-stretch: 72%;
+    font-size: clamp(2.375rem, 5.9vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.012em;
+  }
+
+  .why__wide-frame {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    margin-inline: var(--spacing-margin);
+  }
+  @media (width >= 48rem) {
+    .why__wide-frame {
+      aspect-ratio: 16 / 8;
+      margin-inline: 0;
+    }
+  }
+  .why__wide-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .why__grid {
+    row-gap: var(--spacing-s5);
+  }
+  .pillar {
+    position: relative;
+    grid-column: 1 / -1;
+    padding-top: var(--spacing-s3);
+  }
+  .pillar__rule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: var(--color-line-light);
+    transform-origin: left;
+  }
+  .pillar__rule::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -6px;
+    width: 1.5px;
+    height: 13px;
+    background: var(--color-markup);
+  }
+  .pillar__title {
+    margin-top: var(--spacing-s2);
+    font-family: var(--font-display);
+    font-weight: 650;
+    font-stretch: 75%;
+    font-size: clamp(1.75rem, 2.9vw, 2.75rem);
+    line-height: 1;
+    letter-spacing: -0.008em;
+    max-width: 16ch;
+  }
+  .pillar__body {
+    margin-top: var(--spacing-s2);
+    color: var(--color-stone);
+    max-width: 42ch;
+  }
+  .pillar__spec {
+    margin-top: var(--spacing-s3);
+    color: var(--color-markup);
+  }
+  .why__portrait {
+    grid-column: 1 / -1;
+  }
+  .why__portrait-frame {
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+  }
+  .why__portrait-frame img {
+    width: 100%;
+    height: 112%;
+    object-fit: cover;
+  }
+
+  /* Tablet: two columns, staggered */
+  @media (width >= 48rem) {
+    .pillar {
+      grid-column: span 4;
+    }
+    .pillar--2,
+    .pillar--4 {
+      margin-top: var(--spacing-s6);
+    }
+    .why__portrait {
+      grid-column: 3 / span 4;
+      grid-row: 3;
+    }
+  }
+
+  /* Desktop: asymmetric — portrait anchors the left, pillars step down the right */
+  @media (width >= 64rem) {
+    .why__grid {
+      row-gap: var(--spacing-s6);
+    }
+    .pillar--1 {
+      grid-column: 1 / span 4;
+      grid-row: 1;
+    }
+    .pillar--2 {
+      grid-column: 7 / span 5;
+      grid-row: 1;
+      margin-top: var(--spacing-s6);
+    }
+    .why__portrait {
+      grid-column: 2 / span 4;
+      grid-row: 2 / span 2;
+      align-self: start;
+    }
+    .pillar--3 {
+      grid-column: 7 / span 4;
+      grid-row: 2;
+      margin-top: 0;
+    }
+    .pillar--4 {
+      grid-column: 9 / span 4;
+      grid-row: 3;
+      margin-top: 0;
+    }
+  }
+</style>

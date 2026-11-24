@@ -1,0 +1,354 @@
+@import 'tailwindcss';
+
+/* ─────────────────────────────────────────────────────────────
+   FONTS — self-hosted Latin subsets (see /public/fonts)
+   ───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/archivo-wdth.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Sans';
+  src: url('/fonts/instrument-sans-wdth.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-stretch: 75% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Instrument Serif';
+  src: url('/fonts/instrument-serif.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Metric-matched fallbacks keep layout shift near zero while fonts swap */
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Arial Narrow'), local('Arial');
+  size-adjust: 92%;
+  ascent-override: 92%;
+  descent-override: 22%;
+}
+@font-face {
+  font-family: 'Instrument Sans Fallback';
+  src: local('Arial');
+  size-adjust: 97%;
+  ascent-override: 96%;
+  descent-override: 25%;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   ───────────────────────────────────────────────────────────── */
+@theme {
+  /* Palette — concrete, paper, one hand-drawn blue */
+  --color-ink: #0e0e0c;
+  --color-graphite: #1c1c1a;
+  --color-stone: #5f5c57; /* secondary text on light (5.4:1 on haze) */
+  --color-concrete: #8a8782; /* secondary text on dark (5.3:1 on ink) */
+  --color-haze: #eeeae4;
+  --color-bone: #f7f5f1;
+  --color-markup: #2438ff; /* the single accent (6.2:1 on bone) */
+  --color-markup-light: #5b6bff; /* accent text on ink (4.6:1) */
+  --color-markup-pale: #7480ff; /* accent text on graphite (5.2:1) */
+  --color-line-dark: rgb(247 245 241 / 0.12);
+  --color-line-light: rgb(14 14 12 / 0.14);
+
+  /* Families */
+  --font-display: 'Archivo', 'Archivo Fallback', 'Arial Narrow', sans-serif;
+  --font-sans: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+
+  /* Fluid type scale */
+  --text-mega: clamp(4.25rem, 12vw, 15.5rem);
+  --text-mega--line-height: 0.84;
+  --text-display: clamp(3rem, 8vw, 8.5rem);
+  --text-display--line-height: 0.88;
+  --text-h2: clamp(2.25rem, 5vw, 5rem);
+  --text-h2--line-height: 0.95;
+  --text-h3: clamp(1.5rem, 2.4vw, 2.25rem);
+  --text-h3--line-height: 1.05;
+  --text-lead: clamp(1.125rem, 1.35vw, 1.375rem);
+  --text-lead--line-height: 1.45;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+
+  /* Spacing rhythm: 8 · 16 · 24 · 40 · 64 · 104 · 168 */
+  --spacing-s1: 0.5rem;
+  --spacing-s2: 1rem;
+  --spacing-s3: 1.5rem;
+  --spacing-s4: 2.5rem;
+  --spacing-s5: 4rem;
+  --spacing-s6: 6.5rem;
+  --spacing-s7: 10.5rem;
+  --spacing-margin: clamp(1.25rem, 4vw, 4rem);
+  --spacing-gutter: clamp(1rem, 1.7vw, 1.5rem);
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-quart: cubic-bezier(0.76, 0, 0.24, 1);
+
+  --breakpoint-md: 48rem; /* 768 — tablet */
+  --breakpoint-lg: 64rem; /* 1024 — desktop */
+  --breakpoint-xl: 90rem; /* 1440 */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BASE
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-bone);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    font-stretch: 100%;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-markup);
+    color: var(--color-bone);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-markup-light);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+  img,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+  /* Custom cursor active: hide native pointer on fine pointers only */
+  html.has-cursor,
+  html.has-cursor a,
+  html.has-cursor button {
+    cursor: none;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITIES — the system's reusable primitives
+   ───────────────────────────────────────────────────────────── */
+
+/* 4 / 8 / 12-column structural grid */
+@utility grid-site {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--spacing-gutter);
+  padding-inline: var(--spacing-margin);
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Massive condensed display — signage proportions, luxury spacing */
+@utility type-mega {
+  font-family: var(--font-display);
+  font-size: var(--text-mega);
+  line-height: var(--text-mega--line-height);
+  font-weight: 800;
+  font-stretch: 62%;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  @media (width >= 48rem) and (width < 64rem) {
+    font-size: 14.5vw;
+  }
+}
+@utility type-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: var(--text-display--line-height);
+  font-weight: 750;
+  font-stretch: 68%;
+  text-transform: uppercase;
+}
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  line-height: var(--text-h2--line-height);
+  font-weight: 700;
+  font-stretch: 75%;
+  letter-spacing: -0.005em;
+}
+/* Instrument Serif italic — the human, hand-written voice */
+@utility type-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  font-stretch: normal;
+}
+/* Technical annotation labels — Archivo expanded caps */
+@utility type-label {
+  font-family: var(--font-display);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  font-weight: 500;
+  font-stretch: 125%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+@utility type-lead {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+}
+
+/* Line masks for split-text reveals */
+@utility line-mask {
+  display: block;
+  overflow: clip;
+  overflow-clip-margin: 0.08em;
+  padding-bottom: 0.02em;
+}
+
+/* Visually hidden but readable */
+@utility sr-only-focusable {
+  &:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTONS — sharp, rectangular, a fill that wipes in like ink
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  .btn {
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3.25rem; /* 52px touch target */
+    padding: 0 1.375rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-stretch: 125%;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: color 0.6s var(--ease-expo), border-color 0.6s var(--ease-expo);
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.6s var(--ease-expo);
+  }
+  .btn:hover::before,
+  .btn:focus-visible::before {
+    clip-path: inset(0 0 0 0);
+  }
+  .btn svg {
+    flex: none;
+    transition: transform 0.6s var(--ease-expo);
+  }
+  .btn:hover svg {
+    transform: translate(2px, -2px);
+  }
+
+  .btn--primary {
+    background: var(--color-markup);
+    color: var(--color-bone);
+  }
+  .btn--primary::before {
+    background: var(--color-bone);
+  }
+  .btn--primary:hover,
+  .btn--primary:focus-visible {
+    color: var(--color-ink);
+  }
+
+  .btn--ghost {
+    border: 1px solid rgb(247 245 241 / 0.28);
+    color: var(--color-bone);
+  }
+  .btn--ghost::before {
+    background: var(--color-bone);
+  }
+  .btn--ghost:hover,
+  .btn--ghost:focus-visible {
+    color: var(--color-ink);
+    border-color: var(--color-bone);
+  }
+
+  /* On light sections */
+  .on-light .btn--ghost {
+    border-color: rgb(14 14 12 / 0.3);
+    color: var(--color-ink);
+  }
+  .on-light .btn--ghost::before {
+    background: var(--color-ink);
+  }
+  .on-light .btn--ghost:hover {
+    color: var(--color-bone);
+    border-color: var(--color-ink);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LENIS
+   ───────────────────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PRE-ANIMATION STATES — only when JS + motion are available,
+   so no-JS / reduced-motion users always see full content.
+   ───────────────────────────────────────────────────────────── */
+html.js.motion-ok [data-reveal='fade'] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

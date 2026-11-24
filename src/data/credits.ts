@@ -1,0 +1,15 @@
+/** Every photograph on the site. Mirrors /credits.md. All Pexels License (free for commercial use). */
+export const CREDITS = [
+  { use: '02 Introduction — main figure', title: 'Grayscale Photo of People Working on a Construction Site', by: 'Aleksandr Evstafev', profile: 'https://www.pexels.com/@aleksandr-evstafev-86841387/', url: 'https://www.pexels.com/photo/grayscale-photo-of-people-working-on-a-construction-site-9057783/' },
+  { use: '02 Introduction — detail', title: 'Building in process of construction', by: 'Brunxs', profile: 'https://www.pexels.com/@brunxs/', url: 'https://www.pexels.com/photo/building-in-process-of-construction-6032905/' },
+  { use: '03 Concept A — tower', title: 'Skyscraper Under Construction', by: 'Johny Goh', profile: 'https://www.pexels.com/@johny-goh-321946023/', url: 'https://www.pexels.com/photo/skyscraper-under-construction-13986101/' },
+  { use: '03 Concept A — steel detail', title: 'Man Sitting on Steel Beam Welding', by: 'Cesar A Ramirez Vallejo Traphitho', profile: 'https://www.pexels.com/@traphitho/', url: 'https://www.pexels.com/photo/man-sitting-on-steel-beam-welding-14539147/' },
+  { use: '03 Concept B — pool + 04 Animation hover', title: 'View of a Luxurious Villa with a Swimming Pool', by: 'Ahmet Çötür', profile: 'https://www.pexels.com/@ahmetcotur/', url: 'https://www.pexels.com/photo/view-of-a-luxurious-villa-with-a-swimming-pool-26859026/' },
+  { use: '03 Concept B — villa', title: 'Modern Luxury Villa with Infinity Pool', by: 'Ahmet Çötür', profile: 'https://www.pexels.com/@ahmetcotur/', url: 'https://www.pexels.com/photo/modern-luxury-villa-with-infinity-pool-31817156/' },
+  { use: '03 Concept B — living room', title: 'Luxurious Modern Living Room with Ocean View', by: 'Ahmet Çötür', profile: 'https://www.pexels.com/@ahmetcotur/', url: 'https://www.pexels.com/photo/luxurious-modern-living-room-with-ocean-view-31817163/' },
+  { use: '03 Concept C — concrete', title: 'Concrete Building Under a Clear Blue Sky', by: 'David Brown', profile: 'https://www.pexels.com/@ninobur/', url: 'https://www.pexels.com/photo/concrete-building-under-a-clear-blue-sky-14086482/' },
+  { use: '03 Concept C — white building', title: 'White Concrete Building', by: 'Rachel Claire', profile: 'https://www.pexels.com/@rachel-claire/', url: 'https://www.pexels.com/photo/white-concrete-building-6127360/' },
+  { use: '03 Concept C — facade', title: 'White Concrete Building with Black Metal Railings', by: 'Vlad Ioan', profile: 'https://www.pexels.com/@vlad-ioan-21692766/', url: 'https://www.pexels.com/photo/white-concrete-building-with-black-metal-railings-8983882/' },
+  { use: '06 Why us — steps', title: 'Close Up Steps', by: 'Jan van der Wolf', profile: 'https://www.pexels.com/@jan-van-der-wolf-11680885/', url: 'https://www.pexels.com/photo/close-up-steps-15686968/' },
+  { use: '06 Why us — stair', title: 'Stairway from the Underground', by: 'joao Guerreiro', profile: 'https://www.pexels.com/@gunas4life/', url: 'https://www.pexels.com/photo/stairway-from-the-underground-14303621/' },
+] as const;

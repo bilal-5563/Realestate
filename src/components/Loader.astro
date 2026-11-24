@@ -1,0 +1,89 @@
+---
+import { SITE } from '../site.config';
+// Elevation drawing of the hero villa — the same building the Spline scene shows.
+// Every path uses pathLength="1" so the draw-on is a simple 1 → 0 dashoffset tween.
+---
+
+<div id="loader" class="loader" aria-hidden="true">
+  <div class="loader__inner grid-site h-full content-between py-s3 md:py-s4">
+    <div class="col-span-full flex items-start justify-between type-label text-concrete">
+      <span>{SITE.name}<sup class="text-[0.6em]">®</sup> — Site drawings</span>
+      <span class="hidden md:inline">Sheet A-01 · Elevation</span>
+    </div>
+
+    <svg
+      class="loader__drawing col-span-full mx-auto w-full max-w-[min(640px,86vw)]"
+      viewBox="0 0 600 300"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.25"
+      vector-effect="non-scaling-stroke"
+    >
+      <!-- datum / ground -->
+      <path data-draw pathLength="1" d="M10 260H590" />
+      <!-- plinth -->
+      <path data-draw pathLength="1" d="M60 260V248H420V260" />
+      <!-- blade wall -->
+      <path data-draw pathLength="1" d="M90 248V60H102V248" />
+      <!-- glass pavilion + mullions -->
+      <path data-draw pathLength="1" d="M130 248V188H350V248" />
+      <path data-draw pathLength="1" d="M157 190V246M184 190V246M211 190V246M238 190V246M265 190V246M292 190V246M319 190V246" opacity=".45" />
+      <!-- level cap -->
+      <path data-draw pathLength="1" d="M126 188V183H354V188" />
+      <!-- cantilever volume -->
+      <path data-draw pathLength="1" d="M230 182V130H520V182H230" />
+      <!-- ribbon window -->
+      <path data-draw pathLength="1" d="M262 146H498V164H262Z" opacity=".6" />
+      <!-- roof slab -->
+      <path data-draw pathLength="1" d="M216 129V120H534V129" />
+      <!-- dimension: height of blade -->
+      <path data-draw pathLength="1" d="M70 60V248M64 60H76M64 248H76" opacity=".7" />
+      <!-- dimension: cantilever span -->
+      <path data-draw pathLength="1" d="M350 206H520M350 200V212M520 200V212" opacity=".7" />
+    </svg>
+
+    <div class="col-span-full flex items-end justify-between gap-s3">
+      <p class="loader__count type-mega leading-[0.8] text-bone tabular-nums" data-count>000</p>
+      <p class="type-label pb-2 text-right text-concrete">
+        <span class="block">Drafting</span>
+        <span class="block text-markup-light">Construction · Architecture · Real estate</span>
+      </p>
+    </div>
+  </div>
+  <span class="loader__datum" aria-hidden="true"></span>
+</div>
+
+<style>
+  .loader {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--color-ink);
+    color: var(--color-markup);
+    clip-path: inset(0 0 0 0);
+  }
+  :global(html.js.motion-ok:not(.is-loaded)) .loader {
+    display: block;
+  }
+  :global(html.js.motion-ok:not(.is-loaded)) {
+    overflow: clip;
+  }
+  .loader__drawing [data-draw] {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+  .loader__count {
+    font-size: clamp(5rem, 16vw, 15rem);
+  }
+  .loader__datum {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--color-markup);
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+</style>

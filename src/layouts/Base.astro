@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+import { SITE } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${SITE.name} — ${SITE.tagline} Web design for construction, architecture & real estate`,
+  description = SITE.description,
+  image = '/og.jpg',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+const org = `${SITE.url}/#studio`;
+const services = [
+  ['Web design', 'Art direction, typography and layouts designed separately for phone, tablet and desktop.'],
+  ['Web development', 'Hand-built, accessible websites with a CMS where needed.'],
+  ['Web animation', 'Scroll-driven storytelling, 3D and transitions.'],
+  ['Responsive design', 'Touch-first layouts for phone, tablet and desktop.'],
+  ['Performance optimisation', 'Image pipelines and page budgets, built to a 90+ mobile Lighthouse score.'],
+  ['Technical SEO', 'Semantic structure, structured data, sitemaps and local search basics.'],
+];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': org,
+      name: SITE.legalName,
+      url: SITE.url,
+      email: SITE.email,
+      telephone: `+${SITE.whatsapp}`,
+      description: SITE.description,
+      image: ogImage,
+      logo: new URL('/apple-touch-icon.png', Astro.site).href,
+      areaServed: 'Worldwide',
+      knowsAbout: ['Construction company websites', 'Architecture studio websites', 'Real estate developer websites'],
+      contactPoint: { '@type': 'ContactPoint', contactType: 'sales', email: SITE.email, telephone: `+${SITE.whatsapp}` },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Website services for construction, architecture and real estate',
+        itemListElement: services.map(([name, description]) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name, description, provider: { '@id': org } },
+        })),
+      },
+    },
+    { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: SITE.legalName, publisher: { '@id': org }, inLanguage: 'en' },
+    { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: title, description, isPartOf: { '@id': `${SITE.url}/#website` }, about: { '@id': org } },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#0e0e0c" />
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.legalName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Plinth — Websites built like landmarks. A concrete villa model with blue architectural markup." />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans-wdth.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Capability flags before first paint: drives pre-animation states & loader -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!reduce) d.classList.add('motion-ok');
+        try {
+          if (sessionStorage.getItem('plinth:seen')) d.classList.add('is-return');
+        } catch (e) {}
+        // Safety net: if the motion bundle never boots, reveal everything.
+        window.setTimeout(function () {
+          if (!window.__plinthBooted) d.classList.remove('motion-ok'), d.classList.add('is-loaded');
+        }, 6000);
+      })();
+    </script>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="bg-ink text-bone">
+    <a
+      href="#main"
+      class="sr-only-focusable fixed top-3 left-3 z-[200] bg-markup px-4 py-3 type-label text-bone"
+      >Skip to content</a
+    >
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import GridLines from '../components/GridLines.astro';
+import { ArrowUpRight } from 'lucide-react';
+
+const palette = [
+  { name: 'Ink', hex: '#0E0E0C', use: 'Dark sections, text', fg: '#F7F5F1' },
+  { name: 'Graphite', hex: '#1C1C1A', use: 'Dark surfaces', fg: '#F7F5F1' },
+  { name: 'Stone', hex: '#5F5C57', use: 'Secondary text on light', fg: '#F7F5F1' },
+  { name: 'Concrete', hex: '#8A8782', use: 'Secondary text on dark', fg: '#0E0E0C' },
+  { name: 'Haze', hex: '#EEEAE4', use: 'Light sections', fg: '#0E0E0C' },
+  { name: 'Bone', hex: '#F7F5F1', use: 'Lightest surface / text on ink', fg: '#0E0E0C' },
+  { name: 'Markup', hex: '#2438FF', use: 'The one accent', fg: '#F7F5F1' },
+  { name: 'Markup Light', hex: '#5B6BFF', use: 'Accent text on ink', fg: '#0E0E0C' },
+];
+const spacing = [
+  ['s1', 8],
+  ['s2', 16],
+  ['s3', 24],
+  ['s4', 40],
+  ['s5', 64],
+  ['s6', 104],
+  ['s7', 168],
+];
+---
+
+<Base title="Design system — Plinth" noindex>
+  <main class="relative">
+    <section class="relative bg-ink py-s6">
+      <GridLines />
+      <div class="grid-site relative gap-y-s5">
+        <p class="col-span-full type-label text-concrete"><span class="text-markup-light">(00)</span>&ensp;Design system</p>
+        <h1 class="col-span-full type-mega">Site <span class="type-accent normal-case">drawings</span></h1>
+
+        <div class="col-span-full grid gap-s1 md:grid-cols-4">
+          {
+            palette.map((c) => (
+              <div class="flex aspect-[4/3] flex-col justify-between p-s2" style={`background:${c.hex};color:${c.fg}`}>
+                <span class="type-label">{c.name}</span>
+                <span class="text-sm">
+                  {c.hex}
+                  <br />
+                  <span class="opacity-70">{c.use}</span>
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="on-light relative bg-haze py-s6 text-ink">
+      <GridLines tone="light" />
+      <div class="grid-site relative gap-y-s4">
+        <p class="col-span-full type-label text-stone">Type scale</p>
+        <p class="col-span-full type-mega">Mega 62% wdth</p>
+        <p class="col-span-full type-display">Display <span class="type-accent">accent</span></p>
+        <p class="col-span-full type-h2">H2 — Archivo 75% width</p>
+        <p class="col-span-full lg:col-span-6 type-lead">
+          Lead — Instrument Sans. We design and build premium websites for construction companies, architecture
+          studios and real estate developers.
+        </p>
+        <p class="col-span-full lg:col-span-5 lg:col-start-8 text-stone">
+          Body — 17px / 1.6. Readable at length, quiet beside the display face. Secondary text uses Stone on light
+          surfaces and Concrete on dark ones.
+        </p>
+        <p class="col-span-full type-label">Label — Archivo 125% width, 0.14em tracking</p>
+
+        <p class="col-span-full mt-s4 type-label text-stone">Spacing rhythm</p>
+        <div class="col-span-full flex flex-wrap items-end gap-s3">
+          {
+            spacing.map(([n, px]) => (
+              <div class="text-center">
+                <div class="bg-markup" style={`width:${px}px;height:${px}px`} />
+                <span class="mt-2 block type-label text-stone">
+                  {n} · {px}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+
+        <p class="col-span-full mt-s4 type-label text-stone">Buttons</p>
+        <div class="col-span-full flex flex-wrap gap-s2">
+          <a href="#" class="btn btn--primary">Start a project <ArrowUpRight size={16} strokeWidth={1.5} /></a>
+          <a href="#" class="btn btn--ghost">Secondary <ArrowUpRight size={16} strokeWidth={1.5} /></a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

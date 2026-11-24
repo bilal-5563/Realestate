@@ -1,0 +1,165 @@
+---
+import { ArrowUpRight } from 'lucide-react';
+import { SITE, whatsappHref } from '../site.config';
+
+const links = [
+  { href: '#work', label: 'Work', n: '03' },
+  { href: '#process', label: 'Process', n: '05' },
+  { href: '#contact', label: 'Contact', n: '07' },
+];
+---
+
+<header class="nav fixed inset-x-0 top-0 z-50" data-nav>
+  <div class="grid-site items-center py-s3">
+    <a
+      href="#top"
+      class="col-span-2 md:col-span-2 lg:col-span-3 flex items-baseline gap-1 font-display text-[1.375rem] font-[750] tracking-[0.02em] [font-stretch:112%] uppercase"
+      aria-label={`${SITE.name} — back to top`}
+      data-nav-item
+    >
+      {SITE.name}<span class="text-[0.5em] text-markup-light">®</span>
+    </a>
+
+    <p class="hidden lg:block lg:col-span-3 type-label whitespace-nowrap text-concrete" data-nav-item>
+      For the built world
+    </p>
+
+    <nav class="hidden md:flex md:col-span-6 lg:col-span-6 items-center justify-end gap-s4" aria-label="Primary">
+      <ul class="flex items-center gap-s4">
+        {
+          links.map((l) => (
+            <li data-nav-item>
+              <a href={l.href} class="nav-link type-label group relative inline-flex items-baseline gap-1.5 py-2">
+                <span class="text-concrete text-[0.625rem]">{l.n}</span>
+                <span>{l.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href="#contact"
+        class="btn btn--primary hidden! lg:inline-flex!"
+        data-magnetic
+        data-cursor="Talk"
+        data-nav-item
+      >
+        <span class="btn__label" data-magnetic-inner>Start a project</span>
+        <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
+      </a>
+    </nav>
+
+    <button
+      type="button"
+      class="md:hidden col-span-2 justify-self-end type-label inline-flex items-center gap-2 py-3 pl-4"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      data-menu-toggle
+    >
+      <span data-menu-label>Menu</span>
+      <span class="menu-icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
+  </div>
+</header>
+
+<div id="mobile-menu" class="mobile-menu md:hidden" hidden data-lenis-prevent>
+  <div class="grid-site h-full content-between pt-28 pb-s4">
+    <nav class="col-span-full" aria-label="Mobile">
+      <ul class="border-t border-line-dark">
+        {
+          links.map((l) => (
+            <li class="border-b border-line-dark">
+              <a href={l.href} class="flex items-baseline justify-between py-s3 type-display" data-menu-link>
+                {l.label}
+                <span class="type-label text-concrete">{l.n}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="col-span-full grid gap-s2">
+      <a href={whatsappHref} class="btn btn--primary w-full justify-between" target="_blank" rel="noopener">
+        <span>WhatsApp us</span>
+        <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden="true" />
+      </a>
+      <a href={`mailto:${SITE.email}`} class="type-label text-concrete py-3">{SITE.email}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .nav {
+    color: var(--color-bone);
+    transition:
+      transform 0.7s var(--ease-expo),
+      background-color 0.5s ease,
+      border-color 0.5s ease;
+    border-bottom: 1px solid transparent;
+  }
+  /* Past the hero's first fold: a solid ink bar, hidden while reading down, back on scroll-up */
+  .nav.is-solid {
+    background: var(--color-ink);
+    border-bottom-color: var(--color-line-dark);
+  }
+  .nav.is-hidden {
+    transform: translateY(-100%);
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    height: 1px;
+    background: var(--color-markup-light);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.6s var(--ease-expo);
+  }
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .menu-icon {
+    position: relative;
+    width: 22px;
+    height: 10px;
+  }
+  .menu-icon i {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.5s var(--ease-expo), top 0.5s var(--ease-expo);
+  }
+  .menu-icon i:first-child {
+    top: 0;
+  }
+  .menu-icon i:last-child {
+    top: 8px;
+  }
+  :global([aria-expanded='true']) .menu-icon i:first-child {
+    top: 4px;
+    transform: rotate(45deg);
+  }
+  :global([aria-expanded='true']) .menu-icon i:last-child {
+    top: 4px;
+    transform: rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: var(--color-ink);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.8s var(--ease-quart);
+  }
+  .mobile-menu.is-open {
+    clip-path: inset(0 0 0 0);
+  }
+</style>
